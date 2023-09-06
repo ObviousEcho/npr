@@ -7,9 +7,9 @@ CREATE TABLE Users
     userId INT NOT NULL
     AUTO_INCREMENT PRIMARY KEY,
     userName VARCHAR
-    (30) NOT NULL,
+    (30) NOT NULL UNIQUE,
     userEmail VARCHAR
-    (30) NOT NULL,
+    (30) NOT NULL UNIQUE,
     userPassword VARCHAR
     (30) NOT NULL
 );
