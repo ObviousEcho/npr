@@ -11,7 +11,7 @@ CREATE TABLE Users
     userEmail VARCHAR
     (30) NOT NULL UNIQUE,
     userPassword VARCHAR
-    (30) NOT NULL
+    (100) NOT NULL
 );
 
     ALTER TABLE Users AUTO_INCREMENT = 1000;
