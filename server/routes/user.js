@@ -57,6 +57,7 @@ router.post("/signup", async ({ body }, res) => {
     res.json({
       message: "success",
       token: token,
+      data: rows,
     });
   });
 });
@@ -90,9 +91,11 @@ router.post("/login", ({ body }, res) => {
       };
       // sign jwt
       const token = signToken(profile);
+
       res.json({
         message: "success",
         token: token,
+        data: rows,
       });
     } else {
       res.json({ message: "something went wrong!" });

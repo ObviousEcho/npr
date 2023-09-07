@@ -16,7 +16,7 @@ if (process.env.JAWSDB_URL) {
 
 db.connect((err) => {
   if (err) throw err;
-  console.log(`Connected to the memory_db database`);
+  console.log(`Connected to the voyages_db database`);
 });
 
 exports.databaseConnection = db;
