@@ -21,7 +21,22 @@ const voyageController = {
   },
 
   // create new voyage for user
-  async createVoyage(req, res) {},
+  async createVoyage({ body }, res) {
+    const sql = `INSERT INTO voyages (userId, voyageName) VALUES (?, ?)`;
+    const params = [body.userId, body.voyageName];
+
+    db.query(sql, params, (err, rows) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+
+      res.json({
+        message: "success",
+        data: rows,
+      });
+    });
+  },
 };
 
 module.exports = voyageController;

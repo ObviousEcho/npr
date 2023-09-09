@@ -1,8 +1,14 @@
 const router = require("express").Router();
 
-const { getVoyageData } = require("../../controllers/log-controller");
+const {
+  getVoyageData,
+  createLog,
+} = require("../../controllers/log-controller");
 
-// /api/voyages/:voyageId
+// /api/log/:voyageId
 router.route("/:voyageId").get(getVoyageData);
+
+// /api/log
+router.route("/").post(createLog);
 
 module.exports = router;
