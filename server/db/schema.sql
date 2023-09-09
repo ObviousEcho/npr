@@ -18,13 +18,13 @@ CREATE TABLE Users
 
     CREATE TABLE Voyages
     (
-        uId INT NOT NULL,
+        userId INT NOT NULL,
         voyageId INT NOT NULL
         AUTO_INCREMENT PRIMARY KEY,
         voyageName VARCHAR
         (30) NOT NULL,
         FOREIGN KEY
-        (uId) REFERENCES Users
+        (userId) REFERENCES Users
         (userId) ON
         DELETE CASCADE
     );

@@ -6,9 +6,10 @@ VALUES
     ("CaptHaddy", "haddy@test.com", "test1234");
 
 INSERT INTO Voyages
-    (uId, voyageName)
+    (userId, voyageName)
 VALUES
     (1000, "Catalina"),
+    (1000, "Test"),
     (1001, "The Channel Islands"),
     (1002, "Mission Bay");
 
