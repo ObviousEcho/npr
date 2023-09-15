@@ -1,4 +1,3 @@
-const { authMiddleware } = require("../utils/auth");
 const db = require("../config/connections").databaseConnection;
 
 const logController = {

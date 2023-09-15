@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const { authMiddleware } = require("../../utils/auth");
+router.use(authMiddleware);
 
 const {
   getVoyageData,
