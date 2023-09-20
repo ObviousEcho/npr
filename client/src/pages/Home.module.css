@@ -2,3 +2,15 @@
   max-width: 100%;
   height: auto;
 }
+
+.login {
+  position: absolute;
+  bottom: 7em;
+  right: 5.9em;
+}
+
+.logout {
+  position: absolute;
+  bottom: 9.5em;
+  right: 5.9em;
+}
