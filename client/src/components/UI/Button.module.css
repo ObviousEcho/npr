@@ -2,10 +2,11 @@
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 8px;
-  width: 11em;
+  width: 14em;
   height: 2.5em;
   margin: 0.4em;
   background-color: #f88379;
   color: white;
+  font-weight: bold;
   display: block;
 }

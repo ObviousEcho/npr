@@ -1,5 +1,6 @@
 import classes from "./Home.module.css";
 import Button from "../components/UI/Button";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -24,13 +25,17 @@ const Home = () => {
           className={classes.image}
         />
       </picture>
-      {/* <div className={classes.login}>
-        <Button buttonName="Login" />
-        <Button buttonName="Signup" />
-      </div> */}
-      <div className={classes.logout}>
-        <Button buttonName="Logout" />
+      <div className={classes.login}>
+        <Link to="/login" className={classes.link}>
+          <Button buttonName="Login" />
+        </Link>
+        <Link to="/signup" className={classes.link}>
+          <Button buttonName="Signup" />
+        </Link>
       </div>
+      {/* <div className={classes.logout}>
+        <Button buttonName="Logout" />
+      </div> */}
     </>
   );
 };
