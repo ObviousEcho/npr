@@ -5,28 +5,51 @@
 
 .login {
   position: absolute;
-  bottom: 7em;
+  bottom: 33%;
   right: 15.6em;
 }
 
 .logout {
   position: absolute;
   bottom: 9.5em;
-  right: 15.6em;
+  right: 15%;
 }
 
 .link {
   text-decoration: none;
 }
 
+@media screen and (orientation: landscape) and (min-width: 1024px) and (max-width: 1919px) {
+  .login {
+    bottom: 30%;
+    right: 15%;
+  }
+}
+
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .login {
+    bottom: 20%;
+    right: 50%;
+    margin-right: -7.5em;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 1023px) {
+  .login {
+    right: 15%;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .login {
-    bottom: 7em;
-    right: 4.6em;
+    bottom: 13%;
+    right: 50%;
+    margin-right: -7.5em;
   }
 
   .logout {
-    bottom: 9.5em;
-    right: 4.6em;
+    bottom: 10%;
+    right: 50%;
+    margin-right: -7.5em;
   }
 }
