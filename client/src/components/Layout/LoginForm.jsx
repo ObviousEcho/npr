@@ -1,20 +1,24 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./LoginForm.module.css";
 import Button from "../UI/Button";
 
 const LoginForm = () => {
+  const data = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <>
       <h1 className={classes.heading}>Login</h1>
       <div className={classes.divForm}>
-        <Form className={classes.form}>
-          <label className={classes.label}>User Name</label>
+        <Form method="post" action="/login" className={classes.form}>
+          <label className={classes.label}>User Email</label>
           <br />
           <input
             className={classes.input}
-            name="User Name"
-            type="text"
-            placeHolder="Popeye"
+            name="email"
+            type="email"
+            placeholder="Popeye@sailor.com"
           />
           <br />
           <label className={classes.label}>Password</label>
@@ -23,12 +27,18 @@ const LoginForm = () => {
             className={classes.input}
             name="password"
             type="password"
-            placeHolder="OliveOil1234!"
+            placeholder="OliveOil1234!"
           />
           <div className={classes.buttonDiv}>
-            <Button type="button" buttonName="Submit" />
+            <Button
+              type="button"
+              disabled={isSubmitting}
+              buttonName={isSubmitting ? "Submitting..." : "Submit"}
+            />
           </div>
         </Form>
+        {data && data.errors && <p>{data.errors}</p>}
+        {data && data.message && <p>{data.message}</p>}
       </div>
     </>
   );

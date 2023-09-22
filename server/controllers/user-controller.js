@@ -25,10 +25,11 @@ const userController = {
   async createUser({ body }, res) {
     // validator helper function
     if (!validate(body.userEmail, body.userPassword)) {
-      res.status(400).json({ error: "Invalid credentials!" });
+      res
+        .status(400)
+        .json({ errors: "Invalid credentials!", message: "Please try again." });
       return;
     }
-
     const userName = body.userName;
     const userEmail = body.userEmail;
 
@@ -77,7 +78,8 @@ const userController = {
         body.userPassword,
         rows[0].userPassword
       );
-
+      console.log(body.userPassword);
+      console.log(rows[0].userPassword);
       if (validPassword) {
         // compile jwt payload
         const userId = rows[0].userId;
@@ -90,11 +92,10 @@ const userController = {
         };
         // sign jwt
         const token = signToken(profile);
-
+        console.log(token);
         res.json({
           message: "success",
           token: token,
-          data: rows,
         });
       } else {
         res.json({ message: "something went wrong!" });

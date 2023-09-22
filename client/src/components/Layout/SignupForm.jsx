@@ -1,20 +1,24 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./SignupForm.module.css";
 import Button from "../UI/Button";
 
 const SignupForm = () => {
+  const data = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
   return (
     <>
       <h1 className={classes.heading}>Signup</h1>
       <div className={classes.divForm}>
-        <Form className={classes.form}>
+        <Form method="post" action="/signup" className={classes.form}>
           <label className={classes.label}>User Name</label>
           <br />
           <input
             className={classes.input}
-            name="User Name"
+            name="username"
             type="text"
-            placeHolder="Popeye"
+            placeholder="Popeye"
           />
           <br />
           <label className={classes.label}>Email</label>
@@ -23,7 +27,7 @@ const SignupForm = () => {
             className={classes.input}
             name="email"
             type="email"
-            placeHolder="popeye@spinach.com"
+            placeholder="popeye@spinach.com"
           />
           <br />
           <label className={classes.label}>Password</label>
@@ -32,13 +36,19 @@ const SignupForm = () => {
             className={classes.input}
             name="password"
             type="password"
-            placeHolder="OliveOil1234!"
+            placeholder="OliveOil1234!"
           />
           <br />
           <div className={classes.buttonDiv}>
-            <Button type="button" buttonName="Submit" />
+            <Button
+              type="button"
+              disabled={isSubmitting}
+              buttonName={isSubmitting ? "Submitting..." : "Submit"}
+            />
           </div>
         </Form>
+        {data && data.errors && <p>{data.errors}</p>}
+        {data && data.message && <p>{data.message}</p>}
       </div>
     </>
   );
