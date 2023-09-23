@@ -1,5 +1,6 @@
 import { json, redirect } from "react-router-dom";
 import SignupForm from "../components/Layout/SignupForm";
+import Auth from "../utils/auth";
 
 const Signup = () => {
   return <SignupForm />;
@@ -35,6 +36,10 @@ export async function action({ request }) {
     throw json({ message: "Could not authenticate user." }, { status: 500 });
   }
 
-  console.log(response);
+  const resData = await response.json();
+  const token = resData.token;
+
+  Auth.login(token);
+
   return redirect("/");
 }

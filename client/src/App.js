@@ -5,11 +5,14 @@ import RootLayout from "./pages/Root";
 import Home from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import Signup, { action as signupAction } from "./pages/Signup";
+import Auth from "./utils/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    id: "root",
+    loader: Auth.getToken,
     children: [
       { index: true, element: <Home /> },
       { path: "login", element: <Login />, action: loginAction },

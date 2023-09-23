@@ -64,6 +64,13 @@ const userController = {
 
   // login existing user
   async loginUser({ body }, res) {
+    if (!validate(body.userEmail, body.userPassword)) {
+      res
+        .status(400)
+        .json({ errors: "Invalid credentials!", message: "Please try again." });
+      return;
+    }
+
     const sql = `SELECT userId, userName, userEmail, userPassword FROM Users WHERE userEmail = ?`;
     const params = [body.userEmail];
 
@@ -78,8 +85,7 @@ const userController = {
         body.userPassword,
         rows[0].userPassword
       );
-      console.log(body.userPassword);
-      console.log(rows[0].userPassword);
+
       if (validPassword) {
         // compile jwt payload
         const userId = rows[0].userId;
@@ -92,7 +98,7 @@ const userController = {
         };
         // sign jwt
         const token = signToken(profile);
-        console.log(token);
+
         res.json({
           message: "success",
           token: token,

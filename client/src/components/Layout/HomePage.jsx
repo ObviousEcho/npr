@@ -1,8 +1,11 @@
 import classes from "./HomePage.module.css";
 import Button from "../UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 const HomePage = () => {
+  const token = useRouteLoaderData("root");
+
   return (
     <>
       <picture>
@@ -25,17 +28,22 @@ const HomePage = () => {
           className={classes.image}
         />
       </picture>
-      <div className={classes.login}>
-        <Link to="/login" className={classes.link}>
-          <Button buttonName="Login" />
-        </Link>
-        <Link to="/signup" className={classes.link}>
-          <Button buttonName="Signup" />
-        </Link>
-      </div>
-      {/* <div className={classes.logout}>
+      {!token ? (
+        <div className={classes.login}>
+          <Link to="/login" className={classes.link}>
+            <Button buttonName="Login" />
+          </Link>
+          <Link to="/signup" className={classes.link}>
+            <Button buttonName="Signup" />
+          </Link>
+        </div>
+      ) : (
+        <div className={classes.logout}>
+          <Link onClick={Auth.logout()} className={classes.link}>
             <Button buttonName="Logout" />
-          </div> */}
+          </Link>
+        </div>
+      )}
     </>
   );
 };
