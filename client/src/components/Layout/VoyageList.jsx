@@ -10,7 +10,7 @@ const VoyageList = () => {
       <ul className={classes.list}>
         {voyages.data.map((voyage) => {
           return (
-            <li className={classes.listItem}>
+            <li key={voyage.voyageId} className={classes.listItem}>
               {voyage.voyageId}, {voyage.voyageName}
             </li>
           );
