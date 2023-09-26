@@ -6,8 +6,8 @@ const expiration = "2h";
 
 module.exports = {
   authMiddleware: async function (req, res, next) {
-    let token = req.body.token || req.query.token || req.headers.authorization;
-    if (req.headers.authorization) {
+    let token = req.body.token || req.query.token || req.headers.Authorization;
+    if (req.headers.Authorization) {
       token = token.split(" ").pop().trim();
     }
 

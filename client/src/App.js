@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import Signup, { action as signupAction } from "./pages/Signup";
 import Voyages, { action as addVoyageAction } from "./pages/Voyages";
+import SingleVoyage from "./pages/SingleVoyage";
 import Auth from "./utils/auth";
 
 const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login />, action: loginAction },
       { path: "signup", element: <Signup />, action: signupAction },
       { path: "voyages", element: <Voyages />, action: addVoyageAction },
+      { path: "voyages/:id", element: <SingleVoyage /> },
     ],
   },
 ]);

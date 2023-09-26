@@ -10,18 +10,20 @@ export default Voyages;
 
 export async function action({ request }) {
   const data = await request.formData();
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+  const userData = Auth.getProfile();
+  const userId = userData.data.userId;
+
   const voyageData = {
-    userId: "",
+    userId,
     voyageName: data.get("voyagename"),
   };
-  const token = Auth.getToken();
-  console.log(`voyages ${token}`);
 
   const response = await fetch("/api/voyages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorizatin: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(voyageData),
   });
@@ -40,5 +42,5 @@ export async function action({ request }) {
 
   const resData = await response.json();
 
-  // return redirect("/voyages");
+  return redirect(`/voyages/${userId}`);
 }

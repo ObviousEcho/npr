@@ -37,7 +37,7 @@ function MainNavigation() {
             <NavLink to="/" className={classes.link}>
               Home
             </NavLink>
-            {token ? (
+            {/* {token ? (
               <Link onClick={Auth.logout()} className={classes.link}>
                 Logout
               </Link>
@@ -45,7 +45,7 @@ function MainNavigation() {
               <NavLink to="/login" className={classes.link}>
                 Login
               </NavLink>
-            )}
+            )} */}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -24,7 +24,7 @@ const NewVoyage = () => {
             <Button
               type="button"
               disabled={isSubmitting}
-              buttonName={"Submit"}
+              buttonName={isSubmitting ? "...Submititting" : "Submit"}
             />
           </div>
         </Form>
