@@ -41,5 +41,5 @@ export async function action({ request }) {
 
   Auth.login(token);
 
-  return redirect("/");
+  return redirect("/voyages");
 }
