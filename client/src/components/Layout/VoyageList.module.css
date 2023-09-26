@@ -1,0 +1,15 @@
+.voyageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.list {
+  list-style-type: none;
+}
+
+.listItem {
+  border: 1px black solid;
+  margin-top: 1em;
+}

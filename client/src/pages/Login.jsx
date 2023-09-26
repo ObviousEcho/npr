@@ -1,5 +1,5 @@
 import { json, redirect } from "react-router-dom";
-import LoginForm from "../components/Layout/LoginForm";
+import LoginForm from "../components/Forms/LoginForm";
 import Auth from "../utils/auth";
 
 const Login = () => {

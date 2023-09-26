@@ -1,5 +1,5 @@
 import { json, redirect } from "react-router-dom";
-import SignupForm from "../components/Layout/SignupForm";
+import SignupForm from "../components/Forms/SignupForm";
 import Auth from "../utils/auth";
 
 const Signup = () => {

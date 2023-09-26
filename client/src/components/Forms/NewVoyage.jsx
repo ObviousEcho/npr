@@ -28,7 +28,6 @@ const NewVoyage = () => {
             />
           </div>
         </Form>
-        {data && data.errors && <p>{data.errors}</p>}
         {data && data.message && <p>{data.message}</p>}
       </div>
     </>
