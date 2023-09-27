@@ -25,12 +25,10 @@ export async function action({ request }) {
     voyageName: data.get("voyagename"),
   };
 
-  console.log(token);
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
-  console.log(headers);
 
   const response = await fetch("/api/voyages", {
     method: "POST",
@@ -50,9 +48,10 @@ export async function action({ request }) {
     throw json({ message: "Unable to add voyage!" }, { status: 500 });
   }
 
-  // const resData = await response.json();
+  const resData = await response.json();
+  const voyageId = resData.data.insertId;
 
-  return redirect(`/voyages/${userId}`);
+  return redirect(`/voyages/${voyageId}`);
 }
 
 export async function loader() {

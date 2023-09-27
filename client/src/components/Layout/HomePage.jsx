@@ -39,7 +39,7 @@ const HomePage = () => {
         </div>
       ) : (
         <div className={classes.logout}>
-          <Link onClick={Auth.logout()} className={classes.link}>
+          <Link onClick={Auth.logout} className={classes.link}>
             <Button buttonName="Logout" />
           </Link>
         </div>

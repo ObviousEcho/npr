@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         action: addVoyageAction,
         loader: loadVoyages,
       },
-      { path: "voyages/:id", element: <SingleVoyage /> },
+      { path: "voyages/:voyageId", element: <SingleVoyage /> },
     ],
   },
 ]);

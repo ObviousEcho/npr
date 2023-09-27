@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, useRouteLoaderData } from "react-router-dom";
+import { NavLink, useRouteLoaderData } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 
 import Container from "react-bootstrap/Container";
@@ -34,18 +34,32 @@ function MainNavigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/" className={classes.link}>
-              Home
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              <p>Home</p>
             </NavLink>
-            {/* {token ? (
-              <Link onClick={Auth.logout()} className={classes.link}>
-                Logout
-              </Link>
-            ) : (
-              <NavLink to="/login" className={classes.link}>
-                Login
+            {token ? (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+              >
+                <p onClick={Auth.logout}>Logout</p>
               </NavLink>
-            )} */}
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+              >
+                <p>Login</p>
+              </NavLink>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

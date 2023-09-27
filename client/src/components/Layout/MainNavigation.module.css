@@ -1,7 +1,20 @@
+a {
+  text-decoration: none;
+  margin: 0.5em;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #f88379;
+}
+
 .link {
   margin: 0.5em;
   font-size: 1.1em;
   font-weight: bold;
   color: #f88379;
-  text-decoration: none;
+}
+
+a:hover,
+a.active {
+  color: turquoise;
+  text-decoration: underline;
 }

@@ -15,7 +15,8 @@
   right: 15%;
 }
 
-.link {
+.link,
+a:hover {
   text-decoration: none;
 }
 
