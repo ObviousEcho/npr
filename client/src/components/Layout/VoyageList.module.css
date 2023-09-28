@@ -1,15 +1,26 @@
 .voyageDiv {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 1.5em;
 }
 
 .list {
+  width: 75vw;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-0.9em);
 }
 
 .listItem {
-  border: 1px black solid;
-  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 2.5em;
+  background-color: #69e0d0;
+  color: white;
+  font-weight: bold;
 }

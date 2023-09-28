@@ -30,6 +30,7 @@ const NewVoyage = () => {
         </Form>
         {data && data.message && <p>{data.message}</p>}
       </div>
+      <hr />
     </>
   );
 };

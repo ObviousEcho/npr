@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import classes from "./VoyageList.module.css";
 
 const VoyageList = () => {
@@ -10,9 +10,9 @@ const VoyageList = () => {
       <ul className={classes.list}>
         {voyages.data.map((voyage) => {
           return (
-            <li key={voyage.voyageId} className={classes.listItem}>
-              {voyage.voyageId}, {voyage.voyageName}
-            </li>
+            <Link to={`/api/log/${voyage.voyageId}`} key={voyage.voyageId}>
+              <li className={classes.listItem}>{voyage.voyageName}</li>
+            </Link>
           );
         })}
       </ul>
