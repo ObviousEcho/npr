@@ -1,3 +1,8 @@
+.homePage {
+  display: flex;
+  justify-content: center;
+}
+
 .image {
   max-width: 100%;
   height: auto;
@@ -6,7 +11,8 @@
 .login {
   position: absolute;
   bottom: 33%;
-  right: 15.6em;
+  display: flex;
+  flex-direction: column;
 }
 
 .logout {
@@ -20,7 +26,21 @@ a:hover {
   text-decoration: none;
 }
 
-@media screen and (orientation: landscape) and (min-width: 1024px) and (max-width: 1919px) {
+@media screen and (min-width: 1920px) {
+  .login {
+    bottom: 40%;
+    right: 20%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .login {
+    bottom: 27%;
+    right: 20%;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1024px) and (max-width: 1439px) {
   .login {
     bottom: 30%;
     right: 15%;
@@ -29,9 +49,7 @@ a:hover {
 
 @media screen and (orientation: portrait) and (min-width: 768px) {
   .login {
-    bottom: 20%;
-    right: 50%;
-    margin-right: -7.5em;
+    bottom: 15%;
   }
 }
 
@@ -43,9 +61,7 @@ a:hover {
 
 @media screen and (max-width: 767px) {
   .login {
-    bottom: 13%;
-    right: 50%;
-    margin-right: -7.5em;
+    bottom: 11%;
   }
 
   .logout {
