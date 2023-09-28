@@ -51,7 +51,7 @@ export async function action({ request }) {
   const resData = await response.json();
   const voyageId = resData.data.insertId;
 
-  return redirect(`/voyages/${voyageId}`);
+  return redirect(`/api/log/${voyageId}`);
 }
 
 export async function loader() {

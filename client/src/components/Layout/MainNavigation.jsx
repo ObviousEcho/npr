@@ -43,13 +43,20 @@ function MainNavigation() {
               <p>Home</p>
             </NavLink>
             {token ? (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                <p onClick={Auth.logout}>Logout</p>
-              </NavLink>
+              <>
+                <NavLink
+                  to={`/voyages`}
+                  className={({ isActive }) =>
+                    isActive ? classes.active : undefined
+                  }
+                >
+                  <p>MyVoyages</p>
+                </NavLink>
+
+                <NavLink>
+                  <p onClick={Auth.logout}>Logout</p>
+                </NavLink>
+              </>
             ) : (
               <NavLink
                 to="/login"

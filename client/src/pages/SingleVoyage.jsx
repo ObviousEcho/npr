@@ -1,5 +1,13 @@
+import AddLogData from "../components/Forms/AddLogData";
+import ViewLogData from "../components/Layout/ViewLogData";
+
 const SingleVoyage = () => {
-  return <h1>Single Voyage</h1>;
+  return (
+    <>
+      <AddLogData />
+      <ViewLogData />
+    </>
+  );
 };
 
 export default SingleVoyage;
