@@ -19,6 +19,7 @@ const LoginForm = () => {
             name="email"
             type="email"
             placeholder="Popeye@sailor.com"
+            required
           />
           <br />
           <label className={classes.label}>Password</label>
@@ -28,6 +29,7 @@ const LoginForm = () => {
             name="password"
             type="password"
             placeholder="OliveOil1234!"
+            required
           />
           <div className={classes.buttonDiv}>
             <Button

@@ -19,6 +19,7 @@ const NewVoyage = () => {
             name="voyagename"
             type="text"
             placeholder="Croatia"
+            required
           />
           <div className={classes.buttonDiv}>
             <Button

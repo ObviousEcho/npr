@@ -19,6 +19,7 @@ const SignupForm = () => {
             name="username"
             type="text"
             placeholder="Popeye"
+            required
           />
           <br />
           <label className={classes.label}>Email</label>
@@ -28,6 +29,7 @@ const SignupForm = () => {
             name="email"
             type="email"
             placeholder="popeye@spinach.com"
+            required
           />
           <br />
           <label className={classes.label}>Password</label>
@@ -37,6 +39,7 @@ const SignupForm = () => {
             name="password"
             type="password"
             placeholder="OliveOil1234!"
+            required
           />
           <br />
           <div className={classes.buttonDiv}>
