@@ -57,10 +57,12 @@ export async function action({ request }) {
 export async function loader() {
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  // if (token) {
+  if (!token) {
+    return redirect("/login");
+  }
+
   const userData = Auth.getProfile();
   const userId = userData.data.userId;
-  // }
 
   const response = await fetch(`/api/voyages/${userId}`, {
     method: "GET",

@@ -1,5 +1,6 @@
 // use this to decode a token and get the user's information out of it
 import decode from "jwt-decode";
+import { redirect } from "react-router-dom";
 
 // create a new class to instantiate for a user
 class AuthService {
@@ -13,6 +14,15 @@ class AuthService {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
+  }
+
+  authenticated() {
+    const token = localStorage.getItem("id_token");
+
+    if (!token) {
+      return redirect("/login");
+    }
+    return null;
   }
 
   // check if token is expired
@@ -42,7 +52,7 @@ class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem("id_token");
     // this will reload the page and reset the state of the application
-    // window.location.assign("/");
+    window.location.assign("/");
   }
 }
 
