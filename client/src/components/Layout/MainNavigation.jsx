@@ -40,7 +40,7 @@ function MainNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              <p>Home</p>
+              <p className={classes.link}>Home</p>
             </NavLink>
             {token ? (
               <>
@@ -50,11 +50,13 @@ function MainNavigation() {
                     isActive ? classes.active : undefined
                   }
                 >
-                  <p>MyVoyages</p>
+                  <p className={classes.link}>MyVoyages</p>
                 </NavLink>
 
                 <NavLink>
-                  <p onClick={Auth.logout}>Logout</p>
+                  <p className={classes.link} onClick={Auth.logout}>
+                    Logout
+                  </p>
                 </NavLink>
               </>
             ) : (
@@ -64,7 +66,7 @@ function MainNavigation() {
                   isActive ? classes.active : undefined
                 }
               >
-                <p>Login</p>
+                <p className={classes.link}>Login</p>
               </NavLink>
             )}
           </Nav>

@@ -16,4 +16,5 @@ a:hover,
 a.active {
   color: turquoise;
   text-decoration: underline;
+  text-decoration-color: #f88379;
 }
