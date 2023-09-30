@@ -13,7 +13,6 @@ const RootLayout = () => {
     }
 
     let isExpired = Auth.isTokenExpired(token);
-    console.log(isExpired);
 
     if (isExpired) {
       return Auth.logout();

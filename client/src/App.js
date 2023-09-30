@@ -9,7 +9,7 @@ import Voyages, {
   action as addVoyageAction,
   loader as loadVoyages,
 } from "./pages/Voyages";
-import SingleVoyage from "./pages/SingleVoyage";
+import SingleVoyage, { loader as loadData } from "./pages/SingleVoyage";
 import AddData from "./pages/AddData";
 import Chart from "./pages/Chart";
 import Auth from "./utils/auth";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "log/:voyageId",
         element: <SingleVoyage />,
-        loader: Auth.authenticated,
+        loader: loadData,
       },
       { path: "log/add-data/:voyageId", element: <AddData /> },
       { path: "chart/:voyageId", element: <Chart /> },
