@@ -1,6 +1,6 @@
 .heading {
   text-align: center;
-  margin-top: 0.5em;
+  margin: 0.5em;
 }
 
 .divForm {
@@ -11,6 +11,7 @@
 
 .form {
   box-sizing: border-box;
+  margin-top: 0.5em;
 }
 
 .label {
@@ -20,6 +21,7 @@
 .input {
   width: 21em;
   height: 2.5em;
+  margin: 0.25em;
 }
 
 .coordinates {

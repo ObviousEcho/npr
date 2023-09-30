@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 
-import AddLogData from "../components/Forms/AddLogData";
+import DataActions from "../components/Layout/DataActions";
 import ViewLogData from "../components/Layout/ViewLogData";
+import classes from "./SingleVoyage.module.css";
 
 const SingleVoyage = () => {
   const params = useParams();
@@ -9,8 +10,12 @@ const SingleVoyage = () => {
 
   return (
     <>
-      <AddLogData />
-      <ViewLogData />
+      <main className={classes.logData}>
+        <ViewLogData />
+      </main>
+      <footer className={classes.footer}>
+        <DataActions />
+      </footer>
     </>
   );
 };

@@ -10,6 +10,8 @@ import Voyages, {
   loader as loadVoyages,
 } from "./pages/Voyages";
 import SingleVoyage from "./pages/SingleVoyage";
+import AddData from "./pages/AddData";
+import Chart from "./pages/Chart";
 import Auth from "./utils/auth";
 
 const router = createBrowserRouter([
@@ -29,10 +31,12 @@ const router = createBrowserRouter([
         loader: loadVoyages,
       },
       {
-        path: "/api/log/:voyageId",
+        path: "log/:voyageId",
         element: <SingleVoyage />,
         loader: Auth.authenticated,
       },
+      { path: "log/add-data/:voyageId", element: <AddData /> },
+      { path: "chart/:voyageId", element: <Chart /> },
     ],
   },
 ]);

@@ -1,7 +1,7 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
 
 import Button from "../UI/Button";
-import classes from "./AddLogData.module.css";
+import classes from "./AddLogDataForm.module.css";
 
 const degrees = "\u00B0";
 
@@ -14,6 +14,7 @@ const AddLogData = () => {
     <>
       <div className={classes.divForm}>
         <h1 className={classes.heading}>Add Log Data</h1>
+        <hr />
         <Form
           method="post"
           action="/api/log/:voyageId"
@@ -58,7 +59,7 @@ const AddLogData = () => {
                 className={classes.coordInput}
                 name="latMin"
                 type="text"
-                maxlength="7"
+                maxLength="7"
                 placeholder="32.8166"
               />
             </div>
@@ -69,8 +70,8 @@ const AddLogData = () => {
                 className={classes.coordInput}
                 name="latDir"
                 type="text"
-                minlength="1"
-                maxlength="1"
+                minLength="1"
+                maxLength="1"
                 placeholder="N"
               />
             </div>
@@ -97,7 +98,7 @@ const AddLogData = () => {
                 className={classes.coordInput}
                 name="latMin"
                 type="text"
-                maxlength="7"
+                maxLength="7"
                 placeholder="02.3333"
               />
             </div>
@@ -108,8 +109,8 @@ const AddLogData = () => {
                 className={classes.coordInput}
                 name="latDir"
                 type="text"
-                minlength="1"
-                maxlength="1"
+                minLength="1"
+                maxLength="1"
                 placeholder="W"
               />
             </div>
@@ -140,7 +141,6 @@ const AddLogData = () => {
         </Form>
         {data && data.message && <p>{data.message}</p>}
       </div>
-      <hr />
     </>
   );
 };

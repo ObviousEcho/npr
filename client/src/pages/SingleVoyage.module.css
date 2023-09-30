@@ -1,0 +1,18 @@
+.logData {
+  text-align: center;
+  margin: 1em;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+@media screen and (orientation: landscape) {
+  .footer {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+  }
+}

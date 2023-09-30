@@ -10,7 +10,7 @@ const VoyageList = () => {
       <ul className={classes.list}>
         {voyages.data.map((voyage) => {
           return (
-            <Link to={`/api/log/${voyage.voyageId}`} key={voyage.voyageId}>
+            <Link to={`/log/${voyage.voyageId}`} key={voyage.voyageId}>
               <li className={classes.listItem}>{voyage.voyageName}</li>
             </Link>
           );
