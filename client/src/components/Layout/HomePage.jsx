@@ -7,7 +7,7 @@ const HomePage = () => {
   const token = useRouteLoaderData("root");
 
   return (
-    <div className={classes.homePage}>
+    <main className={classes.homePage}>
       <picture>
         <source media="(min-width: 1367px" srcSet="/images/yacht-1920w.jpg" />
         <source
@@ -44,7 +44,7 @@ const HomePage = () => {
           </Link>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
