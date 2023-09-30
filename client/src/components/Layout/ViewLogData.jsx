@@ -4,7 +4,6 @@ import classes from "./ViewLogData.module.css";
 const ViewLogData = () => {
   const data = useLoaderData();
   const voyageData = data.data;
-  console.log(voyageData);
 
   return (
     <main>
