@@ -25,3 +25,9 @@
   font-weight: bold;
   margin: 0.5em;
 }
+
+@media screen and (min-width: 1300px) {
+  .list {
+    width: 50vw;
+  }
+}
