@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import RootLayout from "./pages/Root";
+import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Login, { action as loginAction } from "./pages/Login";
 import Signup, { action as signupAction } from "./pages/Signup";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     id: "root",
+    errorElement: <ErrorPage />,
     loader: Auth.getToken,
     children: [
       { index: true, element: <Home /> },

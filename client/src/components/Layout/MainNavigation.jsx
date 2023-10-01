@@ -22,7 +22,7 @@ function MainNavigation() {
   }, []);
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" sticky="top" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">
           {width > breakpoint ? (

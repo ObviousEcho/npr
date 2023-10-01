@@ -1,0 +1,15 @@
+.heading {
+  margin: 0.5em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.listItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

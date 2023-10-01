@@ -1,0 +1,29 @@
+.card {
+  border: 1px solid turquoise;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  box-shadow: 0 4px 8px 0 rgba(64, 224, 208);
+  transition: 0.3s;
+  margin: auto;
+  margin-top: 1em;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(64, 224, 208);
+}
+
+.dateTime {
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 10px 0 0 10px;
+  background-color: turquoise;
+  height: 100%;
+  padding: 0.5em;
+}
+
+.dateField {
+  text-align: right;
+}

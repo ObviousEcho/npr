@@ -1,24 +1,15 @@
-import { json, redirect, useParams } from "react-router-dom";
+import { json, redirect } from "react-router-dom";
 
 import AddLogDataForm from "../components/Forms/AddLogDataForm";
 import Auth from "../utils/auth";
 
-let voyageId = "";
-
-const closure = (param) => {
-  voyageId = param;
-};
-
 const AddData = () => {
-  const params = useParams();
-  closure(params.voyageId);
-
   return <AddLogDataForm />;
 };
 
 export default AddData;
 
-export async function action({ request }) {
+export async function action({ request, params }) {
   const data = await request.formData();
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -27,7 +18,7 @@ export async function action({ request }) {
   }
 
   const logData = {
-    voyageId,
+    voyageId: params.voyageId,
     logDate: data.get("logDate"),
     time: data.get("voyageTime"),
     latDeg: data.get("latDeg"),
@@ -41,11 +32,11 @@ export async function action({ request }) {
   };
 
   const newLogData = {
-    voyageId: voyageId,
+    voyageId: logData.voyageId,
     logDate: logData.logDate,
     time: logData.time,
-    latitude: `${logData.latDeg} ${logData.latMin} ${logData.latDir}`,
-    longitude: `${logData.longDeg} ${logData.longMin} ${logData.longDir}`,
+    latitude: `${logData.latDeg}\u00B0 ${logData.latMin}' ${logData.latDir}`,
+    longitude: `${logData.longDeg}\u00B0 ${logData.longMin}' ${logData.longDir}`,
     heading: logData.heading,
     notes: logData.notes,
   };
@@ -73,5 +64,5 @@ export async function action({ request }) {
     throw json({ message: "Unable to add log data!" }, { status: 500 });
   }
 
-  return redirect(`/log/${voyageId}`);
+  return redirect(`/log/${params.voyageId}`);
 }

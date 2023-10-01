@@ -11,8 +11,7 @@
 
 @media screen and (orientation: landscape) {
   .footer {
-    position: -webkit-sticky;
-    position: sticky;
+    position: static;
     bottom: 0;
   }
 }
