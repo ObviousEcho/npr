@@ -11,3 +11,7 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.err {
+  color: red;
+}

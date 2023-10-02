@@ -17,7 +17,7 @@ const ViewLogData = () => {
             return (
               <Card
                 className={classes.listItem}
-                key={data.voyageId}
+                key={data.latitude}
                 voyageName={data.voyageName}
                 logDate={data.logDate}
                 time={data.time}

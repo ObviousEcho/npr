@@ -71,5 +71,9 @@ export async function loader() {
     },
   });
 
+  if (!response.ok) {
+    throw new Response({ message: "Unable to fetch data" }, { status: 500 });
+  }
+
   return response;
 }

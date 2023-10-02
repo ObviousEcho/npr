@@ -34,5 +34,9 @@ export async function loader({ params }) {
     },
   });
 
+  if (!response.ok) {
+    throw new Response({ message: "Unable to fetch data" }, { status: 500 });
+  }
+
   return response;
 }

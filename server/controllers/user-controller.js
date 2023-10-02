@@ -67,7 +67,7 @@ const userController = {
     if (!validate(body.userEmail, body.userPassword)) {
       res
         .status(400)
-        .json({ errors: "Invalid credentials!", message: "Please try again." });
+        .json({ error: "Invalid credentials!", message: "Please try again." });
       return;
     }
 
