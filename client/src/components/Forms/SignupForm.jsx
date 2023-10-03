@@ -1,4 +1,4 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
+import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./SignupForm.module.css";
 import Button from "../UI/Button";
 
@@ -42,6 +42,16 @@ const SignupForm = () => {
             required
           />
           <br />
+          <label className={classes.label}>Confirm Password</label>
+          <br />
+          <input
+            className={classes.input}
+            name="confirmPassword"
+            type="confirmPassword"
+            placeholder="OliveOil1234!"
+            required
+          />
+          <br />
           <div className={classes.buttonDiv}>
             <Button
               type="button"
@@ -50,6 +60,10 @@ const SignupForm = () => {
             />
           </div>
         </Form>
+        <p>Already have an account?</p>
+        <Link to="/login">
+          <h5>Login</h5>
+        </Link>
         {data && data.errors && <p>{data.errors}</p>}
         {data && data.message && <p>{data.message}</p>}
       </div>

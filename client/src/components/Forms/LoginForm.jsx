@@ -1,4 +1,4 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
+import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./LoginForm.module.css";
 import Button from "../UI/Button";
 
@@ -39,6 +39,10 @@ const LoginForm = () => {
             />
           </div>
         </Form>
+        <p>Don't have an acount yet?</p>
+        <Link to="/signup">
+          <h5>Sign up</h5>
+        </Link>
         {data && data.errors && <p>{data.errors}</p>}
         {data && data.message && <p>{data.message}</p>}
       </div>

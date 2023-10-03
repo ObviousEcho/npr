@@ -31,6 +31,12 @@
   margin-top: 1.5em;
 }
 
+@media screen and (orientation: landscape) {
+  .heading {
+    margin-top: 1em;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .input {
     width: 14em;
