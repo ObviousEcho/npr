@@ -31,6 +31,15 @@
   margin-top: 1.5em;
 }
 
+.input.invalid {
+  color: red;
+  border-color: red;
+}
+
+.label.invalid {
+  color: red;
+}
+
 @media screen and (orientation: landscape) {
   .heading {
     margin-top: 1em;

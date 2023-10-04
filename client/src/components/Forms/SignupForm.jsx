@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./SignupForm.module.css";
 import Button from "../UI/Button";
@@ -6,6 +7,26 @@ const SignupForm = () => {
   const data = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
+  const passwordInputHandler = (e) => {
+    let { name, value } = e.target;
+
+    name === "password" ? setPassword(value) : setConfirmPassword(value);
+  };
+
+  useEffect(() => {
+    return confirmPassword !== password ? setIsValid(false) : setIsValid(true);
+  }, [password, confirmPassword]);
+
+  const passwordResetHandler = () => {
+    setPassword("");
+    setConfirmPassword("");
+    setIsValid(true);
+  };
 
   return (
     <>
@@ -38,18 +59,26 @@ const SignupForm = () => {
             className={classes.input}
             name="password"
             type="password"
+            value={password}
             placeholder="OliveOil1234!"
             required
+            onChange={passwordInputHandler}
           />
           <br />
-          <label className={classes.label}>Confirm Password</label>
+          <label
+            className={`${classes["label"]} ${!isValid && classes.invalid}`}
+          >
+            Confirm Password
+          </label>
           <br />
           <input
-            className={classes.input}
+            className={`${classes["input"]} ${!isValid && classes.invalid}`}
             name="confirmPassword"
-            type="confirmPassword"
+            type="password"
+            value={confirmPassword}
             placeholder="OliveOil1234!"
             required
+            onChange={passwordInputHandler}
           />
           <br />
           <div className={classes.buttonDiv}>
@@ -57,6 +86,7 @@ const SignupForm = () => {
               type="button"
               disabled={isSubmitting}
               buttonName={isSubmitting ? "Submitting..." : "Submit"}
+              onClick={passwordResetHandler}
             />
           </div>
         </Form>
