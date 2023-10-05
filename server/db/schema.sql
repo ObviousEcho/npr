@@ -42,3 +42,10 @@ CREATE TABLE Users
             notes TEXT,
             FOREIGN KEY (voyageId) REFERENCES Voyages(voyageId) ON DELETE CASCADE
         );
+
+        CREATE TABLE Token
+        (
+            userId INT NOT NULL,
+            token VARCHAR(200) NOT NULL,
+            createdAt DATETIME DEFAULT(CURRENT_TIMESTAMP)
+        )

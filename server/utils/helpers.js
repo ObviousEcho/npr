@@ -12,4 +12,15 @@ const validate = (email, password) => {
   return true;
 };
 
-module.exports = { validate };
+const validateEmail = (email) => {
+  // email validation
+  const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  const validEmail = emailRegex.test(email);
+
+  if (!validEmail) {
+    return false;
+  }
+  return true;
+};
+
+module.exports = { validate, validateEmail };
