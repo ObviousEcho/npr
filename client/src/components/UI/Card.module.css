@@ -13,7 +13,7 @@
 }
 
 .container {
-  display: block;
+  display: flex;
 }
 
 .card:hover {
@@ -44,6 +44,10 @@
   text-align: left;
 }
 
+.imageDiv {
+  display: none;
+}
+
 .notes {
   text-align: left;
   padding: 0.25em;
@@ -66,7 +70,31 @@
 
   .imageDiv {
     width: 15%;
-    border-left: solid black 1px;
-    border-bottom: solid black 1px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .data {
+    width: 80%;
+  }
+
+  .imageDiv {
+    display: block;
+    width: 20%;
+    border-bottom: gray solid 1px;
+    padding: 2px;
+  }
+}
+
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .data {
+    width: 70%;
+  }
+
+  .imageDiv {
+    display: block;
+    width: 30%;
+    border-bottom: gray solid 1px;
+    padding: 2px;
   }
 }

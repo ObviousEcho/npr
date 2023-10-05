@@ -1,6 +1,5 @@
 import { redirect } from "react-router-dom";
 
-import DataActions from "../components/Layout/DataActions";
 import ViewLogData from "../components/Layout/ViewLogData";
 import classes from "./SingleVoyage.module.css";
 import Auth from "../utils/auth";
@@ -11,9 +10,6 @@ const SingleVoyage = () => {
       <main className={classes.logData}>
         <ViewLogData />
       </main>
-      <footer className={classes.footer}>
-        <DataActions />
-      </footer>
     </>
   );
 };

@@ -1,14 +1,6 @@
 import classes from "./Card.module.css";
 
-const Card = ({
-  voyageName,
-  logDate,
-  time,
-  latitude,
-  longitude,
-  heading,
-  notes,
-}) => {
+const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
   const [date] = logDate.split("T");
   const [logTime] = time.split(":00");
 
@@ -37,10 +29,12 @@ const Card = ({
             Course: {headingDeg}
           </p>
         </div>
-        <div className={classes.imageDiv}>Image</div>
+        <div className={classes.imageDiv}>
+          <img src={svg} height="135" alt="Nautical themed device" />
+        </div>
       </div>
       <div className={classes.notes}>
-        <h6>Notes:</h6>
+        <h6>Log:</h6>
         <p>{notes}</p>
       </div>
     </section>
