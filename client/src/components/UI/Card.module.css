@@ -12,6 +12,10 @@
   margin-top: 1em;
 }
 
+.container {
+  display: block;
+}
+
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(64, 224, 208);
 }
@@ -48,5 +52,21 @@
 @media screen and (min-width: 1440px) {
   .card {
     width: 70%;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1024px) {
+  .container {
+    display: flex;
+  }
+
+  .data {
+    width: 85%;
+  }
+
+  .imageDiv {
+    width: 15%;
+    border-left: solid black 1px;
+    border-bottom: solid black 1px;
   }
 }

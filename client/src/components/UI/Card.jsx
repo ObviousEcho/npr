@@ -23,18 +23,21 @@ const Card = ({
 
   return (
     <section className={classes.card}>
-      <div className={classes.data}>
-        <div className={classes.dateField}>
-          <p className={classes.date}>{date}</p>
-          <p className={classes.time}>Time: {logTime}</p>
+      <div className={classes.container}>
+        <div className={classes.data}>
+          <div className={classes.dateField}>
+            <p className={classes.date}>{date}</p>
+            <p className={classes.time}>Time: {logTime}</p>
+          </div>
+          <p className={classes.log}>
+            Latitude: {latitude}
+            <br />
+            Longitude: {longitude}
+            <br />
+            Course: {headingDeg}
+          </p>
         </div>
-        <p className={classes.log}>
-          Latitude: {latitude}
-          <br />
-          Longitude: {longitude}
-          <br />
-          Course: {headingDeg}
-        </p>
+        <div className={classes.imageDiv}>Image</div>
       </div>
       <div className={classes.notes}>
         <h6>Notes:</h6>
