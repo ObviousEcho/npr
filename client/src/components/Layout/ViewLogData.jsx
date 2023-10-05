@@ -5,7 +5,7 @@ import classes from "./ViewLogData.module.css";
 
 const ViewLogData = () => {
   const data = useLoaderData();
-  const voyageData = data.data;
+  const voyageData = data.data.toReversed();
 
   return (
     <main>

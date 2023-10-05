@@ -24,7 +24,7 @@ function MainNavigation() {
   return (
     <Navbar expand="lg" sticky="top" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           {width > breakpoint ? (
             <span style={{ fontWeight: "bold" }}>Noon Position Report</span>
           ) : (

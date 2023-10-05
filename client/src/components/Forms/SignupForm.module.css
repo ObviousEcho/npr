@@ -33,7 +33,6 @@
 
 .input.invalid {
   color: red;
-  border-color: red;
 }
 
 .label.invalid {
