@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const { validate, validateEmail } = require("../utils/helpers");
 const { signToken } = require("../utils/auth");
 const db = require("../config/connections").databaseConnection;
+const sendEmail = require("../utils/sendEmail");
 
 const userController = {
   // get all users
@@ -119,13 +120,15 @@ const userController = {
       return;
     }
 
+    const userEmail = body.userEmail;
+
     // create and hash reset token
     let resetToken = crypto.randomBytes(32).toString("hex");
     const hashedPassword = await bcrypt.hash(resetToken, 10);
 
     // query Users for entered email
-    let sql = `SELECT userId, userEmail FROM Users WHERE userEmail = ?`;
-    let params = body.userEmail;
+    let sql = `SELECT userId, userName, userEmail FROM Users WHERE userEmail = ?`;
+    let params = userEmail;
 
     db.query(sql, params, (err, rows) => {
       if (err) {
@@ -138,8 +141,10 @@ const userController = {
         return;
       }
 
+      const userName = rows[0].userName;
       // query Token with returned user
       const userId = rows[0].userId;
+
       sql = `SELECT userId, token, createdAt FROM Token WHERE userId = ?`;
 
       db.query(sql, userId, (err, rows) => {
@@ -166,7 +171,20 @@ const userController = {
                 res.status(500).json({ error: err.message });
                 return;
               }
+
+              // link to reset password containing token
               const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${userId}`;
+
+              // send email with link to reset password
+              sendEmail(
+                userEmail,
+                "Password Reset Request",
+                {
+                  name: userName,
+                  link: link,
+                },
+                "./template/requestResetPassword.handlebars"
+              );
               return res.json({
                 message: "Success",
               });
