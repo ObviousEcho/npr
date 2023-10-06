@@ -111,6 +111,8 @@ const userController = {
     });
   },
 
+  // CALLBACK HELL!!
+  // mysql2 npm package doesn't support promises, next time use mysql2-async
   async requestPasswordReset({ body }, res) {
     // validate user entered email
     if (!validateEmail(body.userEmail)) {
@@ -141,9 +143,9 @@ const userController = {
         return;
       }
 
-      const userName = rows[0].userName;
       // query Token with returned user
       const userId = rows[0].userId;
+      const userName = rows[0].userName;
 
       sql = `SELECT userId, token, createdAt FROM Token WHERE userId = ?`;
 
@@ -153,7 +155,7 @@ const userController = {
           return;
         }
 
-        // delete reset token if exists
+        // delete old reset token if exists in database
         if (rows !== 0) {
           sql = `DELETE from Token WHERE userId = ?`;
 
@@ -163,7 +165,7 @@ const userController = {
               return;
             }
 
-            // save hashed token to database
+            // save new hashed token to database
             sql = `INSERT INTO Token (userId, token) VALUES (?, ?)`;
             let params = [userId, hashedPassword];
             db.query(sql, params, (err, rows) => {
@@ -185,6 +187,18 @@ const userController = {
                 },
                 "./template/requestResetPassword.handlebars"
               );
+
+              // delete token from database
+              let sql = `DELETE FROM Token WHERE userId = ?`;
+              let params = userId;
+
+              db.query(sql, params, (err, rows) => {
+                if (err) {
+                  res.status(500).json({ error: err.message });
+                  return;
+                }
+              });
+
               return res.json({
                 message: "Success",
               });
