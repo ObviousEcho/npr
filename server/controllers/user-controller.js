@@ -110,7 +110,7 @@ const userController = {
     });
   },
 
-  async locateUser({ body }, res) {
+  async requestPasswordReset({ body }, res) {
     // validate user entered email
     if (!validateEmail(body.userEmail)) {
       res
@@ -158,8 +158,19 @@ const userController = {
               return;
             }
 
-            res.json({ message: "made it this far!", token: hashedPassword });
-            return;
+            // save hashed token to database
+            sql = `INSERT INTO Token (userId, token) VALUES (?, ?)`;
+            let params = [userId, hashedPassword];
+            db.query(sql, params, (err, rows) => {
+              if (err) {
+                res.status(500).json({ error: err.message });
+                return;
+              }
+              const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${userId}`;
+              return res.json({
+                message: "Success",
+              });
+            });
           });
         }
       });

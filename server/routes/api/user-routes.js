@@ -4,7 +4,7 @@ const {
   getUsers,
   createUser,
   loginUser,
-  locateUser,
+  requestPasswordReset,
 } = require("../../controllers/user-controller");
 
 // /api/users
@@ -16,6 +16,6 @@ router.route("/signup").post(createUser);
 // /api/users/login
 router.route("/login").post(loginUser);
 
-router.route("/newpassword").post(locateUser);
+router.route("/newpassword").post(requestPasswordReset);
 
 module.exports = router;
