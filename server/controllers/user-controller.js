@@ -245,14 +245,32 @@ const userController = {
 
       const [results] = await db.execute(sql, params);
 
+      // retrieve users email from database
+      sql = `SELECT userName, userEmail FROM Users WHERE userId = ?`;
+      params = [userId];
+
+      const [user] = await db.execute(sql, params);
+
+      const userName = user[0].userName;
+      const userEmail = user[0].userEmail;
+
+      // send user confirmation email
+      sendEmail(
+        userEmail,
+        "Password successfully reset!",
+        {
+          name: userName,
+        },
+        "./template/resetPassword.handlebars"
+      );
+
       // delete reset token from database
       sql = `DELETE FROM Token WHERE userId = ?`;
       params = [userId];
 
       const [rows] = await db.execute(sql, params);
 
-      // resolve request
-      res.json({
+      res.status(200).json({
         message: "Success",
       });
 
