@@ -3,7 +3,6 @@ const crypto = require("crypto");
 
 const { validateEmail, validatePassword } = require("../utils/helpers");
 const { signToken } = require("../utils/auth");
-// const db = require("../config/connections").databaseConnection;
 const db = require("../config/connections");
 const sendEmail = require("../utils/sendEmail");
 
@@ -22,7 +21,7 @@ const userController = {
     } catch (err) {
       res.status(500).json({
         error: err.message,
-        message: "Unable to perform request",
+        message: "Unable to perform request.",
       });
     }
   },
@@ -69,7 +68,7 @@ const userController = {
     } catch (err) {
       res.status(400).json({
         error: err.message,
-        message: "Something went wrong",
+        message: "Something went wrong.",
       });
     }
   },
@@ -113,14 +112,14 @@ const userController = {
         const token = signToken(profile);
 
         res.json({
-          message: "success",
+          message: "Success",
           token: token,
         });
       }
     } catch (err) {
       res.status(400).json({
         error: err.message,
-        message: "Invalid credentials, please try again",
+        message: "Invalid credentials, please try again.",
       });
     }
   },
@@ -148,7 +147,7 @@ const userController = {
       if (data.length === 0) {
         res
           .status(404)
-          .json({ error: "Not found", message: "Please try again" });
+          .json({ error: "Not found", message: "Please try again." });
         return;
       }
 
@@ -261,7 +260,7 @@ const userController = {
     } catch (err) {
       res.status(400).json({
         error: err.message,
-        message: "Something went wrong",
+        message: "Something went wrong.",
       });
     }
   },

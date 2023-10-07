@@ -1,40 +1,43 @@
-const db = require("../config/connections").databaseConnection;
+const db = require("../config/connections");
 
 const voyageController = {
   // get all voyages by user
-  getVoyagesByUser(req, res) {
-    const sql = `SELECT voyageId, voyageName FROM Voyages WHERE userId = ?`;
-    const params = [req.params.userId];
+  async getVoyagesByUser(req, res) {
+    try {
+      const sql = `SELECT voyageId, voyageName FROM Voyages WHERE userId = ?`;
+      const params = [req.params.userId];
 
-    db.query(sql, params, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
+      const [data] = await db.execute(sql, params);
 
-      res.json({
-        message: "success",
-        data: rows,
+      res.status(200).json({
+        message: "Success",
+        data: data,
       });
-    });
+    } catch (err) {
+      res.status(500).json({
+        error: err.message,
+        message: "Unable to perform request.",
+      });
+    }
   },
 
   // create new voyage for user
   async createVoyage({ body }, res) {
-    const sql = `INSERT INTO voyages (userId, voyageName) VALUES (?, ?)`;
-    const params = [body.userId, body.voyageName];
+    try {
+      const sql = `INSERT INTO Voyages (userId, voyageName) VALUES (?, ?)`;
+      const params = [body.userId, body.voyageName];
 
-    db.query(sql, params, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
+      const [data] = await db.execute(sql, params);
 
       res.json({
         message: "success",
-        data: rows,
       });
-    });
+    } catch (err) {
+      res.status(400).json({
+        error: err.message,
+        message: "Please try again.",
+      });
+    }
   },
 };
 
