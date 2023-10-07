@@ -8,51 +8,52 @@ const db = require("../config/connections");
 const sendEmail = require("../utils/sendEmail");
 
 const userController = {
-  // get all users
+  // get all users============================================
   async getUsers(req, res) {
-    const sql = `SELECT * FROM Users`;
+    try {
+      let sql = `SELECT * FROM Users`;
 
-    db.query(sql, (err, rows) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({
-        message: "success",
-        data: rows,
+      const [data] = await db.execute(sql);
+
+      res.status(200).json({
+        message: "Success",
+        data: data,
       });
-    });
+    } catch (err) {
+      res.status(500).json({
+        error: err.message,
+        message: "Unable to perform request",
+      });
+    }
   },
 
-  // create new user
+  // create new user==========================================
   async createUser({ body }, res) {
-    // validator helper function
+    // validate email and password from request
     if (
       !validateEmail(body.userEmail) &&
       !validatePassword(body.userPassword)
     ) {
       res
         .status(400)
-        .json({ errors: "Invalid credentials!", message: "Please try again." });
+        .json({ error: "Invalid credentials!", message: "Please try again." });
       return;
     }
-    const userName = body.userName;
-    const userEmail = body.userEmail;
+    try {
+      const userName = body.userName;
+      const userEmail = body.userEmail;
 
-    // hash password using bcrypt
-    const hashedPassword = await bcrypt.hash(body.userPassword, 10);
+      // hash password using bcrypt
+      const hashedPassword = await bcrypt.hash(body.userPassword, 10);
 
-    const sql = `INSERT INTO Users (userName, userEmail, userPassword) VALUES (?, ?, ?)`;
-    const params = [userName, userEmail, hashedPassword];
+      // store new user data to database
+      const sql = `INSERT INTO Users (userName, userEmail, userPassword) VALUES (?, ?, ?)`;
+      const params = [userName, userEmail, hashedPassword];
 
-    db.query(sql, params, (err, rows) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-        return;
-      }
+      const [data] = await db.execute(sql, params);
 
       // compile jwt payload
-      const userId = rows.insertId;
+      const userId = data.insertId;
       const profile = {
         userId: userId,
         userName: userName,
@@ -63,43 +64,46 @@ const userController = {
       res.json({
         message: "success",
         token: token,
-        data: rows,
+        data: data,
       });
-    });
+    } catch (err) {
+      res.status(400).json({
+        error: err.message,
+        message: "Something went wrong",
+      });
+    }
   },
 
-  // login existing user
+  // login existing user==========================================
   async loginUser({ body }, res) {
-    if (
-      !validateEmail(body.userEmail) &&
-      !validatePassword(body.userPassword)
-    ) {
+    const userEmail = body.userEmail;
+    const userPassword = body.userPassword;
+
+    if (!validateEmail(userEmail) && !validatePassword(userPassword)) {
       res
         .status(400)
         .json({ error: "Invalid credentials!", message: "Please try again." });
       return;
     }
 
-    const sql = `SELECT userId, userName, userEmail, userPassword FROM Users WHERE userEmail = ?`;
-    const params = [body.userEmail];
+    try {
+      // query user with email from req.body
+      const sql = `SELECT userId, userName, userEmail, userPassword FROM Users WHERE userEmail = ?`;
+      const params = [userEmail];
 
-    db.query(sql, params, async (err, rows) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-        return;
-      }
+      const [data] = await db.execute(sql, params);
 
       // compare user password with password stored in db
       const validPassword = await bcrypt.compare(
-        body.userPassword,
-        rows[0].userPassword
+        userPassword,
+        data[0].userPassword
       );
 
       if (validPassword) {
         // compile jwt payload
-        const userId = rows[0].userId;
-        const userName = rows[0].userName;
-        const userEmail = rows[0].userEmail;
+        const userId = data[0].userId;
+        const userName = data[0].userName;
+        const userEmail = data[0].userEmail;
         const profile = {
           userId: userId,
           userName: userName,
@@ -112,13 +116,16 @@ const userController = {
           message: "success",
           token: token,
         });
-      } else {
-        res.json({ message: "something went wrong!" });
       }
-    });
+    } catch (err) {
+      res.status(400).json({
+        error: err.message,
+        message: "Invalid credentials, please try again",
+      });
+    }
   },
 
-  // request password reset
+  // request password reset=======================================
   async requestPasswordReset({ body }, res) {
     const userEmail = body.userEmail;
 
@@ -139,7 +146,9 @@ const userController = {
 
       // throw error if not found
       if (data.length === 0) {
-        res.status(404).json({ error: "Not found" });
+        res
+          .status(404)
+          .json({ error: "Not found", message: "Please try again" });
         return;
       }
 
@@ -190,7 +199,6 @@ const userController = {
 
       // handle errors
     } catch (err) {
-      console.log(`Error: ${err.message}`);
       res.status(400).json({
         error: err.message,
         message: "Something went wrong.",
@@ -198,7 +206,7 @@ const userController = {
     }
   },
 
-  // password reset
+  // password reset============================================
   async resetPassword({ body }, res) {
     const token = body.token;
     const userId = body.userId;
@@ -251,7 +259,6 @@ const userController = {
 
       // handle errors
     } catch (err) {
-      console.log(`Err: ${err.message}`);
       res.status(400).json({
         error: err.message,
         message: "Something went wrong",
