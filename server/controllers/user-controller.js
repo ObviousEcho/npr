@@ -1,9 +1,14 @@
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
-const { validate, validateEmail } = require("../utils/helpers");
+const {
+  validate,
+  validateEmail,
+  validatePassword,
+} = require("../utils/helpers");
 const { signToken } = require("../utils/auth");
-const db = require("../config/connections").databaseConnection;
+// const db = require("../config/connections").databaseConnection;
+const db = require("../config/connections");
 const sendEmail = require("../utils/sendEmail");
 
 const userController = {
@@ -111,18 +116,19 @@ const userController = {
     });
   },
 
+  // request password reset
   // CALLBACK HELL!!
   // mysql2 npm package doesn't support promises, next time use mysql2-async
   async requestPasswordReset({ body }, res) {
+    const userEmail = body.userEmail;
+
     // validate user entered email
-    if (!validateEmail(body.userEmail)) {
+    if (!validateEmail(userEmail)) {
       res
         .status(400)
         .json({ error: "Invalid credentials!", message: "Please try again." });
       return;
     }
-
-    const userEmail = body.userEmail;
 
     // create and hash reset token
     let resetToken = crypto.randomBytes(32).toString("hex");
@@ -188,17 +194,6 @@ const userController = {
                 "./template/requestResetPassword.handlebars"
               );
 
-              // delete token from database
-              let sql = `DELETE FROM Token WHERE userId = ?`;
-              let params = userId;
-
-              db.query(sql, params, (err, rows) => {
-                if (err) {
-                  res.status(500).json({ error: err.message });
-                  return;
-                }
-              });
-
               return res.json({
                 message: "Success",
               });
@@ -208,6 +203,99 @@ const userController = {
       });
     });
   },
+
+  // password reset
+  async resetPassword({ body }, res) {
+    const token = body.token;
+    const userId = body.userId;
+    const userPassword = body.userPassword;
+
+    if (!validatePassword(userPassword)) {
+      res.status(400).json({
+        error: "Invalid entry!",
+        message:
+          "Passwords must contain upper and lower case, numbers and special characters (!@#$%^&*).",
+      });
+      return;
+    }
+
+    // query Token for matching userId
+    let sql = `SELECT token FROM Token WHERE userId = ?`;
+    let params = [userId];
+
+    const [rows] = await db.execute(sql, params);
+    console.log(rows);
+
+    // db.execute(sql, params)
+    //   .then(([data]) => {
+    //     return data;
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  },
+
+  // async resetPassword({ body }, res) {
+  //   const token = body.token;
+  //   const userId = body.userId;
+  //   const userPassword = body.userPassword;
+
+  //   if (!validatePassword(userPassword)) {
+  //     res.status(400).json({
+  //       error: "Invalid entry!",
+  //       message:
+  //         "Passwords must contain upper and lower case, numbers and special characters (!@#$%^&*).",
+  //     });
+  //     return;
+  //   }
+
+  //   // query Token for matching userId
+  //   let sql = `SELECT token FROM Token WHERE userId = ?`;
+  //   let params = userId;
+
+  //   db.query(sql, params, (err, rows) => {
+  //     if (err) {
+  //       res.status(500).json(err.message);
+  //     }
+  //     let dbToken = rows[0].token;
+
+  //     // compare token from email with token stored in database
+  //     const isValid = await bcrypt.compare(token, dbToken);
+  //     const hash = await bcrypt.hash(userPassword, 10);
+
+  //     if (!isValid) {
+  //       throw new Error("Invalid or expired reset token.")
+  //     }
+
+  //     // if valid update user password in database
+  //     sql = `UPDATE Users SET userPassword = ? WHERE userId = ?`;
+  //     // params = [hash, userId];
+
+  //     // db.query(sql, params, (err, rows) => {
+  //     //   if (err) {
+  //     //     res.status(500).json(err.message);
+  //     //   }
+
+  //     // delete reset token from database
+  //     // let sql = `DELETE FROM Token WHERE userId = ?`;
+  //     // let params = userId;
+
+  //     // db.query(sql, params, (err, rows) => {
+  //     //   if (err) {
+  //     //     res.status(500).json({ error: err.message });
+  //     //     return;
+  //     //   }
+
+  //     // });
+  //     //   res.json({
+  //     //     message: "Success",
+  //     //   });
+  //     // });
+  //   });
+  // },
 };
 
 module.exports = userController;
