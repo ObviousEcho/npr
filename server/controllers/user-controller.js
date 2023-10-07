@@ -51,6 +51,16 @@ const userController = {
 
       const [data] = await db.execute(sql, params);
 
+      // send user welcome email
+      sendEmail(
+        userEmail,
+        "Password successfully reset!",
+        {
+          name: userName,
+        },
+        "./template/welcome.handlebars"
+      );
+
       // compile jwt payload
       const userId = data.insertId;
       const profile = {
