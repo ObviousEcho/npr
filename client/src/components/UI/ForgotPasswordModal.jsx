@@ -1,19 +1,17 @@
 import { Form } from "react-router-dom";
 
-import classes from "./ForgotPasswordModal.module.css";
+import "./ForgotPasswordModal.css";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ show }) => {
+  const cssClasses = ["modal", show ? "modalOpen" : "modalClosed"];
   return (
-    <>
-      <div className={classes.background}></div>
-      <main className={classes.modalBody}>
-        <h3 className={classes.heading}>Reset your password</h3>
-        <Form method="post" action="" className={classes.email}>
-          <label className={classes.label}>Enter your email:</label>
-          <input className={classes.input} />
-        </Form>
-      </main>
-    </>
+    <main className={cssClasses.join(" ")}>
+      <h3 className={"heading"}>Reset your password</h3>
+      <Form method="post" action="" className={"emailForm"}>
+        <label className={"emailLabel"}>Enter your email:</label>
+        <input className={"emailInput"} />
+      </Form>
+    </main>
   );
 };
 
