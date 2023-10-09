@@ -1,14 +1,17 @@
+import { useReducer } from "react";
 import { Link, Form, useActionData, useNavigation } from "react-router-dom";
-import { useModalContext } from "../../context/modal-context";
 import classes from "./LoginForm.module.css";
 import Button from "../UI/Button";
+import { useModalContext } from "../../context/modal-context";
+import { TRIGGER_MODAL } from "../../context/actions";
+import reducer from "../../context/reducers";
 
 const LoginForm = () => {
   const data = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const initialState = useModalContext();
-  console.log(initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <>
