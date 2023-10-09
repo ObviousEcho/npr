@@ -1,9 +1,13 @@
 import { Form } from "react-router-dom";
+import { useModalContext } from "../../context/modal-context";
 
 import "./ForgotPasswordModal.css";
 
-const ForgotPassword = ({ show }) => {
+const ForgotPassword = () => {
+  const initialState = useModalContext();
+  const show = initialState.isModal;
   const cssClasses = ["modal", show ? "modalOpen" : "modalClosed"];
+
   return (
     <main className={cssClasses.join(" ")}>
       <h3 className={"heading"}>Reset your password</h3>
