@@ -1,10 +1,11 @@
-import { Form } from "react-router-dom";
+import { useFetcher, json } from "react-router-dom";
 import { useModalContext } from "../../context/modal-context";
 import Button from "../UI/Button";
 
 import "./ForgotPasswordModal.css";
 
 const ForgotPassword = () => {
+  const fetcher = useFetcher();
   const { isModal, toggleModal } = useModalContext();
 
   const cssClasses = ["modal", isModal ? "modalOpen" : "modalClosed"];
@@ -12,13 +13,17 @@ const ForgotPassword = () => {
   return (
     <main className={cssClasses.join(" ")}>
       <h3 className={"heading"}>Reset your password</h3>
-      <Form method="post" action="" className={"emailForm"}>
+      <fetcher.Form
+        method="post"
+        action="/requestPassword"
+        className={"emailForm"}
+      >
         <label className={"emailLabel"}>Enter your email:</label>
-        <input className={"emailInput"} />
+        <input className={"emailInput"} name="requestEmail" type="email" />
         <div className={"button"}>
-          <Button buttonName={"Submit"} />
+          <Button type="button" buttonName="Submit" />
         </div>
-      </Form>
+      </fetcher.Form>
       <h4 className={"x"} onClick={toggleModal}>
         X
       </h4>
@@ -27,3 +32,26 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
+
+export async function action({ request }) {
+  const data = await request.formData();
+  const userEmail = data.get("requestEmail");
+
+  const response = await fetch("/api/users/requestpassword", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userEmail }),
+  });
+
+  if (response.status === 400) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: "Unable to perform request." }, { status: 500 });
+  }
+
+  return null;
+}

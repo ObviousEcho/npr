@@ -18,7 +18,7 @@ router.route("/signup").post(createUser);
 router.route("/login").post(loginUser);
 
 // /api/users/newpassword
-router.route("/newpassword").post(requestPasswordReset);
+router.route("/requestpassword").post(requestPasswordReset);
 
 // /api/users/resetpassword
 router.route("/resetpassword").post(resetPassword);
