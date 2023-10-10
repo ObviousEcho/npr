@@ -2,17 +2,11 @@ import { useModalContext } from "../../context/modal-context";
 import "./Backdrop.css";
 
 const Backdrop = () => {
-  const initialState = useModalContext();
-  const show = initialState.isModal;
+  const { isModal, toggleModal } = useModalContext();
 
-  const cssClasses = ["backdrop", show ? "backdropOpen" : "backdropClosed"];
+  const cssClasses = ["backdrop", isModal ? "backdropOpen" : "backdropClosed"];
 
-  return (
-    <div
-      className={cssClasses.join(" ")}
-      onClick={initialState.toggleModal}
-    ></div>
-  );
+  return <div className={cssClasses.join(" ")} onClick={toggleModal}></div>;
 };
 
 export default Backdrop;

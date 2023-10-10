@@ -31,6 +31,10 @@
   margin-top: 1.5em;
 }
 
+.forgot {
+  margin: 1em;
+}
+
 @media screen and (max-width: 767px) {
   .input {
     width: 14em;

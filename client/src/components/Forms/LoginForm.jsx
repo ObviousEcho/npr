@@ -7,7 +7,7 @@ const LoginForm = () => {
   const data = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  const initialState = useModalContext();
+  const { toggleModal } = useModalContext();
 
   return (
     <>
@@ -43,9 +43,11 @@ const LoginForm = () => {
         </Form>
         <p>Don't have an acount yet?</p>
         <Link to="/signup">
-          <h5>Sign up</h5>
+          <h4>Sign up</h4>
         </Link>
-        <Link onClick={initialState.toggleModal}>Forgot Password</Link>
+        <Link onClick={toggleModal}>
+          <h6 className={classes.forgot}>Forgot Password</h6>
+        </Link>
         {data && data.errors && <p>{data.errors}</p>}
         {data && data.message && <p>{data.message}</p>}
       </div>
