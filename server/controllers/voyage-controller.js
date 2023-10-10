@@ -31,6 +31,7 @@ const voyageController = {
 
       res.json({
         message: "success",
+        data: data.insertId,
       });
     } catch (err) {
       res.status(400).json({

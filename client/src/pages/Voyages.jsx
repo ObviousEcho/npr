@@ -49,7 +49,7 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
-  const voyageId = resData.data.insertId;
+  const voyageId = resData.data;
 
   return redirect(`/log/${voyageId}`);
 }

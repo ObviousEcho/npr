@@ -22,6 +22,7 @@ const LoginForm = () => {
             type="email"
             placeholder="Popeye@sailor.com"
             required
+            disabled={isSubmitting}
           />
           <br />
           <label className={classes.label}>Password</label>
@@ -32,6 +33,7 @@ const LoginForm = () => {
             type="password"
             placeholder="OliveOil1234!"
             required
+            disabled={isSubmitting}
           />
           <div className={classes.buttonDiv}>
             <Button
@@ -48,8 +50,10 @@ const LoginForm = () => {
         <Link onClick={toggleModal}>
           <h6 className={classes.forgot}>Forgot Password</h6>
         </Link>
-        {data && data.errors && <p>{data.errors}</p>}
-        {data && data.message && <p>{data.message}</p>}
+        {data && data.error && <p className={classes.error}>{data.error}</p>}
+        {data && data.message && (
+          <p className={classes.error}>{data.message}</p>
+        )}
       </div>
     </>
   );

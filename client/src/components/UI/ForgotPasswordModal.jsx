@@ -45,13 +45,15 @@ export async function action({ request }) {
     body: JSON.stringify({ userEmail }),
   });
 
-  if (response.status === 400) {
-    return response;
+  if (response.status === 400 || response.status === 404) {
+    throw json({ message: response.statusText }, { status: response.status });
   }
 
   if (!response.ok) {
     throw json({ message: "Unable to perform request." }, { status: 500 });
   }
+
+  window.location.replace("/login");
 
   return null;
 }

@@ -5,18 +5,26 @@ import classes from "./ErrorPage.module.css";
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.error(error);
-  console.error(error.data);
 
   let title = "An error occurred";
   let message = "Something went wrong!";
 
+  if (error.status === 400) {
+    title = error.status;
+    message = error.data.message;
+  }
+
   if (error.status === 404) {
-    title = "Not found";
-    message = "Could not find rescource.";
+    title = error.status;
+    if (error.statusText) {
+      message = error.statusText;
+    } else {
+      message = error.data.message;
+    }
   }
 
   if (error.status === 500) {
+    title = error.status;
     message = error.data.message;
   }
 

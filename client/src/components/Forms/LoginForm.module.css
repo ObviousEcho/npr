@@ -35,6 +35,11 @@
   margin: 1em;
 }
 
+.error {
+  color: turquoise;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 767px) {
   .input {
     width: 14em;
