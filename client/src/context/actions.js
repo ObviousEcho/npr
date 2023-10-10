@@ -1,1 +1,0 @@
-export const TRIGGER_MODAL = "TRIGGER_MODAL";
