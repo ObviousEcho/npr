@@ -7,7 +7,12 @@ const Backdrop = () => {
 
   const cssClasses = ["backdrop", show ? "backdropOpen" : "backdropClosed"];
 
-  return <div className={cssClasses.join(" ")}></div>;
+  return (
+    <div
+      className={cssClasses.join(" ")}
+      onClick={initialState.toggleModal}
+    ></div>
+  );
 };
 
 export default Backdrop;
