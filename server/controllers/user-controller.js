@@ -154,12 +154,12 @@ const userController = {
       const [data] = await db.execute(sql, params);
 
       // throw error if not found
-      if (data.length === 0) {
-        res
-          .status(404)
-          .json({ error: "Not found", message: "Please try again." });
-        return;
-      }
+      // if (data.length === 0) {
+      //   res
+      //     .status(404)
+      //     .json({ error: "Not found", message: "Please try again." });
+      //   return;
+      // }
 
       const userId = data[0].userId;
       const userName = data[0].userName;
