@@ -1,17 +1,25 @@
 import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import classes from "./LoginForm.module.css";
 import Button from "../UI/Button";
-import { useModalContext } from "../../context/modal-context";
+import { useGlobalContext } from "../../context/global-context";
 
 const LoginForm = () => {
   const data = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  const { toggleModal } = useModalContext();
+  const { toggleModal } = useGlobalContext();
+
+  const isSuccessful = localStorage.getItem("isSuccessful");
 
   return (
     <>
       <h1 className={classes.heading}>Login</h1>
+      {isSuccessful && (
+        <p className={classes.success}>
+          You have successfully reset your password!
+          <br /> You may now login.
+        </p>
+      )}
       <div className={classes.divForm}>
         <Form method="post" action="/login" className={classes.form}>
           <label className={classes.label}>User Email</label>
@@ -50,7 +58,6 @@ const LoginForm = () => {
         <Link onClick={toggleModal}>
           <h6 className={classes.forgot}>Forgot Password</h6>
         </Link>
-        {data && data.error && <p className={classes.error}>{data.error}</p>}
         {data && data.message && (
           <p className={classes.error}>{data.message}</p>
         )}

@@ -40,6 +40,11 @@
   text-decoration: underline;
 }
 
+.success {
+  color: turquoise;
+  margin: 1em 1em 0 1em;
+}
+
 @media screen and (max-width: 767px) {
   .input {
     width: 14em;

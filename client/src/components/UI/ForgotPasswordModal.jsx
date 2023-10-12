@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useModalContext } from "../../context/modal-context";
+import { useGlobalContext } from "../../context/global-context";
 import Button from "../UI/Button";
 
 import "./ForgotPasswordModal.css";
@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const [length, setLength] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isOk, setIsOk] = useState(true);
-  const { isModal, toggleModal } = useModalContext();
+  const { isModal, toggleModal } = useGlobalContext();
 
   const cssClasses = ["modal", isModal ? "modalOpen" : "modalClosed"];
 
@@ -24,7 +24,7 @@ const ForgotPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (userEmail.length == 0) {
+    if (userEmail.length === 0) {
       setLength(true);
       return;
     }

@@ -94,7 +94,6 @@ const SignupForm = () => {
         <Link to="/login">
           <h5>Login</h5>
         </Link>
-        {data && data.errors && <p>{data.errors}</p>}
         {data && data.message && <p>{data.message}</p>}
       </div>
     </>

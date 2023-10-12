@@ -1,8 +1,8 @@
-import { useModalContext } from "../../context/modal-context";
+import { useGlobalContext } from "../../context/global-context";
 import "./Backdrop.css";
 
 const Backdrop = () => {
-  const { isModal, toggleModal } = useModalContext();
+  const { isModal, toggleModal } = useGlobalContext();
 
   const cssClasses = ["backdrop", isModal ? "backdropOpen" : "backdropClosed"];
 

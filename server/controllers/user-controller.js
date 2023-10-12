@@ -153,14 +153,6 @@ const userController = {
 
       const [data] = await db.execute(sql, params);
 
-      // throw error if not found
-      // if (data.length === 0) {
-      //   res
-      //     .status(404)
-      //     .json({ error: "Not found", message: "Please try again." });
-      //   return;
-      // }
-
       const userId = data[0].userId;
       const userName = data[0].userName;
 
@@ -187,6 +179,15 @@ const userController = {
       params = [userId, hashedResetToken];
 
       const [results] = await db.execute(sql, params);
+
+      // token expiration function
+      const timeoutDelete = async () => {
+        let sql = `DELETE FROM token WHERE userId = ?`;
+        let params = [userId];
+        const [timeout] = await db.execute(sql, params);
+      };
+      //  delete expired token after 10 min
+      setTimeout(timeoutDelete, 10 * 60 * 1000);
 
       // link to reset password containing token
       const link = `${process.env.CLIENT_URL}/password-reset?token=${resetToken}&id=${userId}`;

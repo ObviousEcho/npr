@@ -1,14 +1,14 @@
 import { createContext, useContext, useState } from "react";
 
-const ModalContext = createContext({
+const GlobalContext = createContext({
   isModal: false,
   toggleModal: () => {},
   closeModal: () => {},
 });
 
-export const useModalContext = () => useContext(ModalContext);
+export const useGlobalContext = () => useContext(GlobalContext);
 
-export const ModalProvider = ({ children }) => {
+export const GlobalProvider = ({ children }) => {
   const [isModal, setIsModal] = useState(false);
 
   const toggleModal = () => {
@@ -20,8 +20,14 @@ export const ModalProvider = ({ children }) => {
   };
 
   return (
-    <ModalContext.Provider value={{ isModal, toggleModal, closeModal }}>
+    <GlobalContext.Provider
+      value={{
+        isModal,
+        toggleModal,
+        closeModal,
+      }}
+    >
       {children}
-    </ModalContext.Provider>
+    </GlobalContext.Provider>
   );
 };

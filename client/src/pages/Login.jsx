@@ -9,6 +9,7 @@ const Login = () => {
 export default Login;
 
 export async function action({ request }) {
+  localStorage.removeItem("isSuccessful");
   const data = await request.formData();
   const authData = {
     userEmail: data.get("email"),
@@ -24,7 +25,7 @@ export async function action({ request }) {
   });
 
   if (response.status === 400) {
-    return response;
+    throw json({ message: "Bad request." }, { status: 400 });
   }
 
   if (!response.ok) {

@@ -27,8 +27,6 @@ export async function action({ request }) {
     userPassword: data.get("password"),
   };
 
-  console.log(authData);
-
   const response = await fetch("/api/users/resetpassword", {
     method: "POST",
     headers: {
@@ -38,12 +36,14 @@ export async function action({ request }) {
   });
 
   if (response.status === 400) {
-    return response;
+    throw json({ message: "Bad request." }, { status: 400 });
   }
 
   if (!response.ok) {
-    throw json({ message: "" }, { status: 500 });
+    throw json({ message: "Internal server error." }, { status: 500 });
   }
+
+  localStorage.setItem("isSuccessful", true);
 
   return redirect("/login");
 }
