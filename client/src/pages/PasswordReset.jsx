@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, json, redirect } from "react-router-dom";
 import PasswordResetForm from "../components/Forms/PasswordResetForm";
 
 let token;
@@ -19,8 +19,31 @@ const PasswordReset = () => {
 
 export default PasswordReset;
 
-export async function action() {
-  console.log(token);
-  console.log(userId);
-  return null;
+export async function action({ request }) {
+  const data = await request.formData();
+  const authData = {
+    token: token,
+    userId: userId,
+    userPassword: data.get("password"),
+  };
+
+  console.log(authData);
+
+  const response = await fetch("/api/users/resetpassword", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(authData),
+  });
+
+  if (response.status === 400) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: "" }, { status: 500 });
+  }
+
+  return redirect("/login");
 }

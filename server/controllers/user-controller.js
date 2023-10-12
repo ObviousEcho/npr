@@ -264,6 +264,12 @@ const userController = {
       const userName = user[0].userName;
       const userEmail = user[0].userEmail;
 
+      // delete reset token from database
+      sql = `DELETE FROM Token WHERE userId = ?`;
+      params = [userId];
+
+      const [rows] = await db.execute(sql, params);
+
       // send user confirmation email
       sendEmail(
         userEmail,
@@ -273,12 +279,6 @@ const userController = {
         },
         "./template/resetPassword.handlebars"
       );
-
-      // delete reset token from database
-      sql = `DELETE FROM Token WHERE userId = ?`;
-      params = [userId];
-
-      const [rows] = await db.execute(sql, params);
 
       res.status(200).json({
         message: "Success",
