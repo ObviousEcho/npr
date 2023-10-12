@@ -56,6 +56,7 @@ const AddLogData = () => {
                 min="0"
                 max="90"
                 placeholder="40"
+                required
               />
             </div>
             <div className={classes.coord}>
@@ -67,6 +68,7 @@ const AddLogData = () => {
                 type="text"
                 maxLength="7"
                 placeholder="32.8166"
+                required
               />
             </div>
             <div className={classes.coord}>
@@ -79,6 +81,7 @@ const AddLogData = () => {
                 minLength="1"
                 maxLength="1"
                 placeholder="N"
+                required
               />
             </div>
           </div>
@@ -95,6 +98,7 @@ const AddLogData = () => {
                 min="0"
                 max="180"
                 placeholder="112"
+                required
               />
             </div>
             <div className={classes.coord}>
@@ -106,6 +110,7 @@ const AddLogData = () => {
                 type="text"
                 maxLength="7"
                 placeholder="02.3333"
+                required
               />
             </div>
             <div className={classes.coord}>
@@ -118,6 +123,7 @@ const AddLogData = () => {
                 minLength="1"
                 maxLength="1"
                 placeholder="W"
+                required
               />
             </div>
           </div>
@@ -131,6 +137,7 @@ const AddLogData = () => {
             min="0"
             max="360"
             placeholder="090"
+            required
           />
           <br />
           <label className={classes.label}>Notes</label>

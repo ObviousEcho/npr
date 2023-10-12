@@ -52,11 +52,7 @@ export async function action({ request, params }) {
     body: JSON.stringify(newLogData),
   });
 
-  if (
-    response.status === 422 ||
-    response.status === 401 ||
-    response.status === 400
-  ) {
+  if (response.status === 400) {
     return response;
   }
 

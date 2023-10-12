@@ -42,11 +42,10 @@ const logController = {
         data: data,
       });
     } catch (err) {
-      res.status(400),
-        json({
-          error: err.message,
-          message: "Something went worng, please try again.",
-        });
+      res.status(400).json({
+        error: err.message,
+        message: "Something went worng, please try again.",
+      });
     }
   },
 };

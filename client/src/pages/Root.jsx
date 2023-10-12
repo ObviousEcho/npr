@@ -4,6 +4,7 @@ import { Outlet, useLoaderData } from "react-router-dom";
 import MainNavigation from "../components/Layout/MainNavigation";
 import Backdrop from "../components/UI/Backdrop";
 import ForgotPassword from "../components/UI/ForgotPasswordModal";
+
 import Auth from "../utils/auth";
 
 const RootLayout = () => {

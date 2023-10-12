@@ -13,6 +13,7 @@ import Voyages, {
 import SingleVoyage, { loader as loadData } from "./pages/SingleVoyage";
 import AddData, { action as addLogAction } from "./pages/AddData";
 import Chart from "./pages/Chart";
+import PasswordReset from "./pages/PasswordReset";
 import Auth from "./utils/auth";
 
 const router = createBrowserRouter([
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
         action: addLogAction,
       },
       { path: "chart/:voyageId", element: <Chart /> },
+      { path: "password-reset", element: <PasswordReset /> },
     ],
   },
 ]);

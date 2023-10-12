@@ -54,7 +54,7 @@ const userController = {
       // send user welcome email
       sendEmail(
         userEmail,
-        "Password successfully reset!",
+        "Welcome to NPR!",
         {
           name: userName,
         },
@@ -189,7 +189,7 @@ const userController = {
       const [results] = await db.execute(sql, params);
 
       // link to reset password containing token
-      const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${userId}`;
+      const link = `${process.env.CLIENT_URL}/password-reset?token=${resetToken}&id=${userId}`;
 
       // send email with link to reset password
       sendEmail(

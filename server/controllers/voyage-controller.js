@@ -9,7 +9,7 @@ const voyageController = {
 
       const [data] = await db.execute(sql, params);
 
-      res.status(200).json({
+      res.json({
         message: "Success",
         data: data,
       });

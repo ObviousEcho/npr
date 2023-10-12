@@ -36,11 +36,7 @@ export async function action({ request }) {
     body: JSON.stringify(voyageData),
   });
 
-  if (
-    response.status === 422 ||
-    response.status === 401 ||
-    response.status === 400
-  ) {
+  if (response.status === 400) {
     return response;
   }
 

@@ -1,5 +1,5 @@
-// import { json } from "react-router-dom";
 import { useState } from "react";
+
 import { useModalContext } from "../../context/modal-context";
 import Button from "../UI/Button";
 
@@ -56,11 +56,11 @@ const ForgotPassword = () => {
     <main className={cssClasses.join(" ")}>
       {!isSubmitted ? (
         <>
-          <h3 className={"heading"}>Reset your password</h3>
-          <form className={"emailForm"}>
-            <label className={"emailLabel"}>Enter your email:</label>
+          <h3 className="heading">Reset your password</h3>
+          <form className="emailForm">
+            <label className="emailLabel">Enter your email:</label>
             <input
-              className={"emailInput"}
+              className="emailInput"
               name="requestEmail"
               value={userEmail}
               type="email"
@@ -73,14 +73,14 @@ const ForgotPassword = () => {
           </form>
         </>
       ) : (
-        <main className={"success"}>
+        <main className="success">
           <h2>Success</h2>
-          <p className={"msg"}>
+          <p className="msg">
             Please check your email. A reset link will be sent to: {userEmail}
             <br />
             Link is valid for 10 minutes.
           </p>
-          <p className={"newLink"}>
+          <p className="newLink">
             Need to request another link? Click{" "}
             <a href="#" onClick={resetModal}>
               here!
@@ -91,8 +91,8 @@ const ForgotPassword = () => {
       <h4 className={"x"} onClick={toggleModal}>
         X
       </h4>
-      {length && <p className={"error"}>You must enter a value.</p>}
-      {!isOk && <p className={"error"}>Something went wrong!</p>}
+      {length && <p className="error">You must enter a value.</p>}
+      {!isOk && <p className="error">Something went wrong!</p>}
     </main>
   );
 };
