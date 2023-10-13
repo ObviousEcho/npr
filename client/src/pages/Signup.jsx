@@ -25,7 +25,7 @@ export async function action({ request }) {
   });
 
   if (response.status === 400) {
-    throw json({ message: "Bad request." }, { status: 400 });
+    return response;
   }
 
   if (!response.ok) {

@@ -53,7 +53,7 @@ export async function action({ request, params }) {
   });
 
   if (response.status === 400) {
-    throw json({ message: "Bad request." }, { status: 400 });
+    return response;
   }
 
   if (!response.ok) {

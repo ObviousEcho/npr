@@ -1,4 +1,5 @@
 import classes from "./Card.module.css";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
   const [date] = logDate.split("T");
@@ -29,13 +30,24 @@ const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
             Course: {headingDeg}
           </p>
         </div>
+
         <div className={classes.imageDiv}>
           <img src={svg} height="135" alt="Nautical themed device" />
         </div>
       </div>
-      <div className={classes.notes}>
-        <h6>Log:</h6>
-        <p>{notes}</p>
+      <div className={classes.footer}>
+        <div className={classes.notes}>
+          <h6>Log:</h6>
+          <p>{notes}</p>
+        </div>
+        <div className={classes.icon}>
+          <DeleteForeverIcon
+            sx={{
+              color: "#f89279",
+              fontSize: 40,
+            }}
+          />
+        </div>
       </div>
     </section>
   );

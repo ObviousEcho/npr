@@ -58,6 +58,7 @@ const LoginForm = () => {
         <Link onClick={toggleModal}>
           <h6 className={classes.forgot}>Forgot Password</h6>
         </Link>
+        {data && data.error && <p className={classes.error}>{data.error}</p>}
         {data && data.message && (
           <p className={classes.error}>{data.message}</p>
         )}

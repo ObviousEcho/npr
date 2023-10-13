@@ -14,6 +14,7 @@
 
 .container {
   display: flex;
+  border-bottom: solid gray 1px;
 }
 
 .card:hover {
@@ -23,7 +24,6 @@
 .data {
   font-weight: bold;
   border-radius: 10px 10px 0 0;
-  border-bottom: gray solid 1px;
   padding: 0.25em;
 }
 
@@ -48,9 +48,22 @@
   display: none;
 }
 
-.notes {
-  text-align: left;
+.footer {
+  display: flex;
+  justify-content: space-between;
   padding: 0.25em;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
 }
 
 @media screen and (min-width: 1440px) {
@@ -81,7 +94,6 @@
   .imageDiv {
     display: block;
     width: 20%;
-    border-bottom: gray solid 1px;
     padding: 2px;
   }
 }
@@ -94,7 +106,6 @@
   .imageDiv {
     display: block;
     width: 30%;
-    border-bottom: gray solid 1px;
     padding: 2px;
   }
 }
