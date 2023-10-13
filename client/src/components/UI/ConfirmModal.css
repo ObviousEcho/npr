@@ -1,0 +1,55 @@
+.confirmModal {
+  position: fixed;
+  top: 25%;
+  left: 12%;
+  width: 75%;
+  height: 40%;
+  border: solid black 1px;
+  border-radius: 10px;
+  background-color: aliceblue;
+}
+
+.title {
+  margin: 2em 1em 1em 1em;
+  text-align: center;
+  color: turquoise;
+}
+
+.message {
+  margin: 2em 1em 2em 1em;
+  color: turquoise;
+  text-align: center;
+}
+
+.click {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 4em;
+}
+
+.buttons {
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 8em;
+  height: 2.5em;
+  margin: 0.4em;
+  background-color: #f88379;
+  color: white;
+  font-weight: bold;
+}
+
+.closeBtn {
+  color: gray;
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.openModal {
+  display: block;
+}
+
+.closeModal {
+  display: none;
+}

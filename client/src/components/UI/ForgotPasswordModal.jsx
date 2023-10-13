@@ -88,7 +88,7 @@ const ForgotPassword = () => {
           </p>
         </main>
       )}
-      <h4 className={"x"} onClick={toggleModal}>
+      <h4 className="x" onClick={toggleModal}>
         X
       </h4>
       {length && <p className="error">You must enter a value.</p>}

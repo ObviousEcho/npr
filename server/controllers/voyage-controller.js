@@ -40,6 +40,26 @@ const voyageController = {
       });
     }
   },
+
+  // delete voyage
+  async deleteVoyage(req, res) {
+    try {
+      const { voyageId } = req.params;
+      const sql = `DELETE FROM Voyages WHERE voyageId = ?`;
+      const params = [voyageId];
+
+      const [data] = await db.execute(sql, params);
+
+      res.json({
+        message: "success",
+      });
+    } catch (err) {
+      res.status(500).json({
+        error: err.message,
+        message: "Unable to complete request.",
+      });
+    }
+  },
 };
 
 module.exports = voyageController;
