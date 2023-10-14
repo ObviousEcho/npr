@@ -44,7 +44,7 @@ const ViewLogData = () => {
         <h2>Let's sail away!</h2>
       )}
       <hr />
-      <LogLinks />
+      <LogLinks voyage={voyageData.length ? voyageData[0].voyageName : null} />
       {voyageData.length ? (
         <div className={classes.list}>
           {voyageData.map((data) => {
