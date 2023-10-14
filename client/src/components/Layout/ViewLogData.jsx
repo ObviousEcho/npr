@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import LogLinks from "./LogLinks";
@@ -37,15 +36,7 @@ const ViewLogData = () => {
   const data = useLoaderData();
   const voyageData = data.res.data.toReversed();
 
-  const [logId, setLogId] = useState("");
-
   const voyageName = data.res.response[0].voyageName;
-
-  useEffect(() => {
-    if (voyageData.length) {
-      setLogId(voyageData[0].logId);
-    }
-  }, [voyageData]);
 
   return (
     <main>
@@ -59,9 +50,9 @@ const ViewLogData = () => {
             return (
               <Card
                 className={classes.listItem}
-                key={logId}
+                key={data.logId}
                 voyageName={data.voyageName}
-                logId={logId}
+                logId={data.logId}
                 logDate={data.logDate}
                 time={data.time}
                 latitude={data.latitude}

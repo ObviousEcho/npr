@@ -17,7 +17,11 @@ const Card = ({
   const { toggleConfirmModal, setTitle, setId } = useGlobalContext();
 
   const [date] = logDate.split("T");
-  const [logTime] = time.split(":00");
+  let [logTime] = time.split(":00");
+
+  if (logTime.length === 2) {
+    logTime = `${logTime}:00`;
+  }
 
   let headingDeg;
   if (heading.toString().length === 1) {
@@ -69,6 +73,7 @@ const Card = ({
               fontSize: 40,
             }}
             onClick={deleteLogData}
+            className={classes.trash}
           />
         </div>
       </div>

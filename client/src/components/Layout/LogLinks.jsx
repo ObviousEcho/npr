@@ -22,6 +22,7 @@ const LogLinks = ({ voyage }) => {
           color: "turquoise",
           fontSize: 50,
         }}
+        className={classes.icon}
         onClick={deleteVoyage}
       />
       <Link to={`/chart/${voyageId}`}>View Chart</Link>

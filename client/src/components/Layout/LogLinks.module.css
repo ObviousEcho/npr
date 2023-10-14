@@ -4,3 +4,7 @@
   margin-top: 1em;
   font-size: 1.2em;
 }
+
+.icon:hover {
+  color: #f88379;
+}
