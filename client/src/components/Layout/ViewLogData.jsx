@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import LogLinks from "./LogLinks";
@@ -34,15 +35,21 @@ const svgPath = [
 
 const ViewLogData = () => {
   const data = useLoaderData();
-  const voyageData = data.data.toReversed();
+  const voyageData = data.res.data.toReversed();
+
+  const [logId, setLogId] = useState("");
+
+  const voyageName = data.res.response[0].voyageName;
+
+  useEffect(() => {
+    if (voyageData.length) {
+      setLogId(voyageData[0].logId);
+    }
+  }, [voyageData]);
 
   return (
     <main>
-      {voyageData.length ? (
-        <h1 className={classes.heading}>{voyageData[0].voyageName}</h1>
-      ) : (
-        <h2>Let's sail away!</h2>
-      )}
+      <h1 className={classes.heading}>{voyageName}</h1>
       <hr />
       <LogLinks voyage={voyageData.length ? voyageData[0].voyageName : null} />
       {voyageData.length ? (
@@ -52,8 +59,9 @@ const ViewLogData = () => {
             return (
               <Card
                 className={classes.listItem}
-                key={data.latitude}
+                key={logId}
                 voyageName={data.voyageName}
+                logId={logId}
                 logDate={data.logDate}
                 time={data.time}
                 latitude={data.latitude}

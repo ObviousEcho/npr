@@ -1,7 +1,21 @@
 import classes from "./Card.module.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
+import { useGlobalContext } from "../../context/global-context";
+
+const Card = ({
+  voyageName,
+  logId,
+  logDate,
+  time,
+  latitude,
+  longitude,
+  heading,
+  notes,
+  svg,
+}) => {
+  const { toggleConfirmModal, setTitle, setId } = useGlobalContext();
+
   const [date] = logDate.split("T");
   const [logTime] = time.split(":00");
 
@@ -13,6 +27,14 @@ const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
   } else {
     headingDeg = `${heading}\u00B0`;
   }
+
+  const title = `${voyageName} ${date} ${logTime}`;
+
+  const deleteLogData = () => {
+    toggleConfirmModal();
+    setTitle(title);
+    setId(logId);
+  };
 
   return (
     <section className={classes.card}>
@@ -46,6 +68,7 @@ const Card = ({ logDate, time, latitude, longitude, heading, notes, svg }) => {
               color: "#f89279",
               fontSize: 40,
             }}
+            onClick={deleteLogData}
           />
         </div>
       </div>

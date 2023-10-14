@@ -25,13 +25,31 @@ const ConfirmModal = () => {
     setId("");
   };
 
-  const confirmDelete = async () => {
+  const deleteVoyage = async () => {
     const response = await fetch(`/api/voyages/${confirmId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+    });
+
+    if (response.status === 500) {
+      throw new Error({ error: response.status, message: response.message });
+    }
+
+    toggleModal();
+    window.location.replace("/voyages");
+  };
+
+  const deleteLogEntry = async () => {
+    const response = await fetch(`/api/log/del`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ logId: confirmId }),
     });
 
     if (response.status === 500) {
@@ -49,7 +67,10 @@ const ConfirmModal = () => {
         Are you sure you would like to delete this entry and all of it's data?
       </p>
       <div className="click">
-        <button className="buttons" onClick={confirmDelete}>
+        <button
+          className="buttons"
+          onClick={confirmId.length > 30 ? deleteLogEntry : deleteVoyage}
+        >
           Delete
         </button>
         <button className="buttons" onClick={toggleModal}>

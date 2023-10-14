@@ -34,6 +34,7 @@ CREATE TABLE Users
         CREATE TABLE Log
         (
             voyageId INT NOT NULL,
+            logId VARCHAR(200) NOT NULL,
             logDate DATE NOT NULL,
             time TIME,
             latitude VARCHAR(20) NOT NULL,

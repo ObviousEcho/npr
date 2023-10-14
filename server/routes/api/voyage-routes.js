@@ -14,7 +14,7 @@ router.route("/").post(createVoyage);
 // /api/voyages/:userId
 router.route("/:userId").get(getVoyagesByUser);
 
-// /api/voyages/del/:voyageId
+// /api/voyages/:voyageId
 router.route("/:voyageId").delete(deleteVoyage);
 
 module.exports = router;
