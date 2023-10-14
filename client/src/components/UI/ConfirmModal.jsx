@@ -34,12 +34,12 @@ const ConfirmModal = () => {
       },
     });
 
-    console.log(response);
-    //    if (response.status === 500) {
-    //     throw new Error ({error: response.status, message: response.message})
-    //    }
+    if (response.status === 500) {
+      throw new Error({ error: response.status, message: response.message });
+    }
 
-    // window.location.replace("/voyages");
+    toggleModal();
+    window.location.replace("/voyages");
   };
 
   return (

@@ -11,6 +11,8 @@ const GlobalContext = createContext({
   setTitle: () => {},
   confirmId: "",
   setId: () => {},
+  IsBackdrop: false,
+  closeBackdrop: () => {},
 });
 
 export const useGlobalContext = () => useContext(GlobalContext);
@@ -18,23 +20,34 @@ export const useGlobalContext = () => useContext(GlobalContext);
 export const GlobalProvider = ({ children }) => {
   const [isModal, setIsModal] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
+  const [isBackdrop, setIsBackdrop] = useState(false);
   const [confirmTitle, setConfirmTitle] = useState("");
   const [confirmId, setConfirmId] = useState("");
 
   const toggleModal = () => {
     setIsModal((prev) => !prev);
+    setIsBackdrop((prev) => !prev);
   };
 
   const closeModal = () => {
     setIsModal(false);
+    setIsBackdrop(false);
   };
 
   const toggleConfirmModal = () => {
     setIsConfirmModal((prev) => !prev);
+    setIsBackdrop((prev) => !prev);
+  };
+
+  const closeBackdrop = () => {
+    setIsBackdrop(false);
+    setIsModal(false);
+    setIsConfirmModal(false);
   };
 
   const closeConfirmModal = () => {
     setIsConfirmModal(false);
+    setIsBackdrop(false);
   };
 
   const setTitle = (str) => {
@@ -58,6 +71,8 @@ export const GlobalProvider = ({ children }) => {
         confirmId,
         setTitle,
         setId,
+        isBackdrop,
+        closeBackdrop,
       }}
     >
       {children}

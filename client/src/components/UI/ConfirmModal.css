@@ -1,5 +1,6 @@
 .confirmModal {
   position: fixed;
+  z-index: 200;
   top: 25%;
   left: 12%;
   width: 75%;

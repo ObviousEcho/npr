@@ -3,7 +3,13 @@ import NewVoyage from "../components/Forms/NewVoyage";
 import VoyageList from "../components/Layout/VoyageList";
 import Auth from "../utils/auth";
 
+import { useGlobalContext } from "../context/global-context";
+
 const Voyages = () => {
+  const { closeConfirmModal } = useGlobalContext();
+
+  closeConfirmModal();
+
   return (
     <>
       <NewVoyage />
