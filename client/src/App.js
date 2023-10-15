@@ -13,6 +13,7 @@ import Voyages, {
 import SingleVoyage, { loader as loadData } from "./pages/SingleVoyage";
 import AddData, { action as addLogAction } from "./pages/AddData";
 import Chart from "./pages/Chart";
+import UpdateLog from "./pages/UpdateLog";
 import PasswordReset, {
   action as resetPasswordAction,
 } from "./pages/PasswordReset";
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         element: <PasswordReset />,
         action: resetPasswordAction,
       },
+      { path: "update-log/:logId", element: <UpdateLog /> },
     ],
   },
 ]);

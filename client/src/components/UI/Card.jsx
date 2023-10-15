@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import classes from "./Card.module.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import UpdateIcon from "@mui/icons-material/Update";
 
 import { useGlobalContext } from "../../context/global-context";
 
@@ -67,6 +69,15 @@ const Card = ({
           <p>{notes}</p>
         </div>
         <div className={classes.icon}>
+          <Link to={`/update-log/${logId}`}>
+            <UpdateIcon
+              sx={{
+                color: "#f89279",
+                fontSize: 40,
+              }}
+              className={classes.trash}
+            />
+          </Link>
           <DeleteForeverIcon
             sx={{
               color: "#f89279",
