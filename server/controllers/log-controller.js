@@ -77,6 +77,27 @@ const logController = {
       });
     }
   },
+
+  // get single log entry
+  async getSingleLog(req, res) {
+    try {
+      const logId = req.params.logId;
+      const sql = `SELECT voyageId, logId, logDate, time, latitude, longitude, heading, notes FROM Log WHERE logId = ?`;
+      const params = [logId];
+
+      const [data] = await db.execute(sql, params);
+
+      res.json({
+        message: "success",
+        data: data,
+      });
+    } catch (err) {
+      res.status(500).json({
+        error: err.message,
+        message: "Unable to perform request.",
+      });
+    }
+  },
 };
 
 module.exports = logController;

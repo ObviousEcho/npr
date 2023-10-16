@@ -65,7 +65,7 @@ const ViewLogData = () => {
           })}
         </div>
       ) : (
-        <p>You have not created any wayponts yet.</p>
+        <p>You have not created any waypoints yet.</p>
       )}
     </main>
   );

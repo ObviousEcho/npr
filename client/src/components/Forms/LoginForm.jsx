@@ -51,7 +51,7 @@ const LoginForm = () => {
             />
           </div>
         </Form>
-        <p>Don't have an acount yet?</p>
+        <p>Don't have an account yet?</p>
         <Link to="/signup">
           <h4>Sign up</h4>
         </Link>
