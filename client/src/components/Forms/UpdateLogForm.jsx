@@ -36,7 +36,7 @@ const reducer = (state, action) => {
     case "ALTER_LATDIR":
       return {
         ...state,
-        latdir: action.val,
+        latDir: action.val,
       };
     case "ALTER_LONGDEG":
       return {
@@ -72,7 +72,7 @@ const reducer = (state, action) => {
 
 const UpdateLogForm = () => {
   const loaderData = useLoaderData();
-  // const data = useActionData();
+  const data = useActionData();
   const params = useParams();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
@@ -300,7 +300,7 @@ const UpdateLogForm = () => {
             />
           </div>
         </Form>
-        {/* {data && data.message && <p>{data.message}</p>} */}
+        {data && data.message && <p>{data.message}</p>}
       </div>
     </>
   );
