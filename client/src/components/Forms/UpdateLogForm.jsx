@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import {
   useLoaderData,
   Form,
@@ -9,6 +10,66 @@ import {
 import Button from "../UI/Button";
 import classes from "./UpdateLogForm.module.css";
 
+// reducer function for use with useState below, updates individual form values
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ALTER_DATE":
+      return {
+        ...state,
+        date: action.val,
+      };
+    case "ALTER_TIME":
+      return {
+        ...state,
+        time: action.val,
+      };
+    case "ALTER_LATDEG":
+      return {
+        ...state,
+        latDeg: action.val,
+      };
+    case "ALTER_LATMIN":
+      return {
+        ...state,
+        latMin: action.val,
+      };
+    case "ALTER_LATDIR":
+      return {
+        ...state,
+        latdir: action.val,
+      };
+    case "ALTER_LONGDEG":
+      return {
+        ...state,
+        longDeg: action.val,
+      };
+    case "ALTER_LONGMIN":
+      return {
+        ...state,
+        longMin: action.val,
+      };
+    case "ALTER_LONGDIR":
+      return {
+        ...state,
+        longDir: action.val,
+      };
+    case "ALTER_HEADING":
+      return {
+        ...state,
+        heading: action.val,
+      };
+    case "ALTER_NOTES":
+      return {
+        ...state,
+        notes: action.val,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
 const UpdateLogForm = () => {
   const loaderData = useLoaderData();
   // const data = useActionData();
@@ -16,26 +77,75 @@ const UpdateLogForm = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
+  // split date for display
   const { logDate, time, latitude, longitude, heading, notes } =
     loaderData.data[0];
   const date = logDate.split("T")[0];
 
-  const [deg, latMin, latDir] = latitude.split(" ");
-  let latDeg = deg.split("\u00B0")[0];
+  // split latitude for display
+  const [laDeg, latMin, latDir] = latitude.split(" ");
+  let latDeg = laDeg.split("\u00B0")[0];
   const degrees = "\u00B0";
-  if (latDeg.length === 1) {
-    latDeg = `00${latDeg}`;
-  } else if (latDeg.length === 2) {
-    latDeg = `0${latDeg}`;
-  }
 
-  const [lDeg, longMin, longDir] = longitude.split(" ");
-  let longDeg = lDeg.split("\u00B0")[0];
-  if (longDeg.length === 1) {
-    longDeg = `00${longDeg}`;
-  } else if (longDeg.length === 2) {
-    longDeg = `0${longDeg}`;
-  }
+  // split longitude for display
+  const [loDeg, longMin, longDir] = longitude.split(" ");
+  let longDeg = loDeg.split("\u00B0")[0];
+
+  // useReducer hook to manage state values
+  const [formState, dispatch] = useReducer(reducer, {
+    date,
+    time,
+    latDeg,
+    latMin,
+    latDir,
+    longDeg,
+    longMin,
+    longDir,
+    heading,
+    notes,
+  });
+
+  // handle form change values and dispatch function to update state values
+  const FormChangeHandler = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    switch (inputType) {
+      case "logDate":
+        return dispatch({ type: "ALTER_DATE", val: inputValue });
+
+      case "voyageTime":
+        return dispatch({ type: "ALTER_TIME", val: inputValue });
+
+      case "latDeg":
+        return dispatch({ type: "ALTER_LATDEG", val: inputValue });
+
+      case "latMin":
+        return dispatch({ type: "ALTER_LATMIN", val: inputValue });
+
+      case "latDir":
+        return dispatch({ type: "ALTER_LATDIR", val: inputValue });
+
+      case "longDeg":
+        return dispatch({ type: "ALTER_LONGDEG", val: inputValue });
+
+      case "longMin":
+        return dispatch({ type: "ALTER_LONGMIN", val: inputValue });
+
+      case "longDir":
+        return dispatch({ type: "ALTER_LONGDIR", val: inputValue });
+
+      case "voyageHeading":
+        return dispatch({ type: "ALTER_HEADING", val: inputValue });
+
+      case "voyageNotes":
+        return dispatch({ type: "ALTER_NOTES", val: inputValue });
+
+      default:
+        throw Error("Something went wrong!");
+    }
+  };
 
   return (
     <>
@@ -52,9 +162,10 @@ const UpdateLogForm = () => {
           <input
             className={classes.input}
             name="logDate"
-            value={date}
+            value={formState.date}
             type="date"
             required
+            onChange={FormChangeHandler}
           />
           <br />
           <label className={classes.label}>Time</label>
@@ -62,9 +173,10 @@ const UpdateLogForm = () => {
           <input
             className={classes.input}
             name="voyageTime"
-            value={time}
+            value={formState.time}
             type="time"
             required
+            onChange={FormChangeHandler}
           />
           <br />
           <label className={classes.label}>Latitude</label>
@@ -75,11 +187,12 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="latDeg"
-                value={latDeg}
+                value={formState.latDeg}
                 type="number"
                 min="0"
                 max="90"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
             <div className={classes.coord}>
@@ -88,10 +201,11 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="latMin"
-                value={latMin}
+                value={formState.latMin}
                 type="text"
                 maxLength="7"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
             <div className={classes.coord}>
@@ -100,11 +214,12 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="latDir"
-                value={latDir}
+                value={formState.latDir}
                 type="text"
                 minLength="1"
                 maxLength="1"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
           </div>
@@ -117,11 +232,12 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="longDeg"
-                value={longDeg}
+                value={formState.longDeg}
                 type="number"
                 min="0"
                 max="180"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
             <div className={classes.coord}>
@@ -130,10 +246,11 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="longMin"
-                value={longMin}
+                value={formState.longMin}
                 type="text"
                 maxLength="7"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
             <div className={classes.coord}>
@@ -142,11 +259,12 @@ const UpdateLogForm = () => {
               <input
                 className={classes.coordInput}
                 name="longDir"
-                value={longDir}
+                value={formState.longDir}
                 type="text"
                 minLength="1"
                 maxLength="1"
                 required
+                onChange={FormChangeHandler}
               />
             </div>
           </div>
@@ -156,11 +274,12 @@ const UpdateLogForm = () => {
           <input
             className={classes.input}
             name="voyageHeading"
-            value={heading}
+            value={formState.heading}
             type="number"
             min="0"
             max="360"
             required
+            onChange={FormChangeHandler}
           />
           <br />
           <label className={classes.label}>Notes</label>
@@ -168,8 +287,9 @@ const UpdateLogForm = () => {
           <input
             className={classes.input}
             name="voyageNotes"
-            value={notes}
+            value={formState.notes}
             type="text"
+            onChange={FormChangeHandler}
           />
           <br />
           <div className={classes.buttonDiv}>
