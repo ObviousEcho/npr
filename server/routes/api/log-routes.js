@@ -7,6 +7,7 @@ const {
   createLog,
   deleteLog,
   getSingleLog,
+  updateLog,
 } = require("../../controllers/log-controller");
 
 // /api/log/:voyageId
@@ -20,5 +21,8 @@ router.route("/del").put(deleteLog);
 
 // /api/log/single/:logid
 router.route("/single/:logId").get(getSingleLog);
+
+// /api/log/:logId
+router.route("/:logId").put(updateLog);
 
 module.exports = router;

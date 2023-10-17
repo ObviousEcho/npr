@@ -98,6 +98,35 @@ const logController = {
       });
     }
   },
+
+  async updateLog(req, res) {
+    try {
+      const { logDate, time, latitude, longitude, heading, notes } = req.body;
+      const { logId } = req.params;
+
+      const sql = `UPDATE Log SET logDate = ?, time = ?, latitude = ?, longitude = ?, heading = ?, notes = ? WHERE logId = ?`;
+      const params = [
+        logDate,
+        time,
+        latitude,
+        longitude,
+        heading,
+        notes,
+        logId,
+      ];
+
+      const [data] = await db.execute(sql, params);
+
+      res.json({
+        message: "Success",
+      });
+    } catch (err) {
+      res.status(400).json({
+        error: err.message,
+        message: "Please try again.",
+      });
+    }
+  },
 };
 
 module.exports = logController;
