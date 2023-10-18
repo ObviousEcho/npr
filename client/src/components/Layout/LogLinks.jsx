@@ -17,14 +17,17 @@ const LogLinks = ({ voyage }) => {
   return (
     <div className={classes.links}>
       <Link to={`/log/add-data/${voyageId}`}>Add Log</Link>
-      <DeleteForeverIcon
-        sx={{
-          color: "turquoise",
-          fontSize: 50,
-        }}
-        className={classes.icon}
-        onClick={deleteVoyage}
-      />
+      <div className={classes.tooltip}>
+        <DeleteForeverIcon
+          sx={{
+            color: "turquoise",
+            fontSize: 50,
+          }}
+          className={classes.icon}
+          onClick={deleteVoyage}
+        />
+        <span className={classes.tooltiptext}>Delete voyage</span>
+      </div>
       <Link to={`/chart/${voyageId}`}>View Chart</Link>
     </div>
   );
