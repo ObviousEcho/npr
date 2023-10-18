@@ -69,23 +69,29 @@ const Card = ({
           <p>{notes}</p>
         </div>
         <div className={classes.icon}>
-          <Link to={`/update-log/${logId}`}>
-            <UpdateIcon
+          <div className={classes.updateTip}>
+            <Link to={`/update-log/${logId}`}>
+              <UpdateIcon
+                sx={{
+                  color: "#f89279",
+                  fontSize: 40,
+                }}
+                className={classes.trash}
+              />
+            </Link>
+            <span className={classes.updateToolipText}>Update entry</span>
+          </div>
+          <div className={classes.deleteTip}>
+            <DeleteForeverIcon
               sx={{
                 color: "#f89279",
                 fontSize: 40,
               }}
+              onClick={deleteLogData}
               className={classes.trash}
             />
-          </Link>
-          <DeleteForeverIcon
-            sx={{
-              color: "#f89279",
-              fontSize: 40,
-            }}
-            onClick={deleteLogData}
-            className={classes.trash}
-          />
+            <span className={classes.deleteTooltipText}>Delete entry</span>
+          </div>
         </div>
       </div>
     </section>
