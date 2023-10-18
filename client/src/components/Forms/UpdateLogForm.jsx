@@ -70,16 +70,20 @@ const reducer = (state, action) => {
   }
 };
 
-const UpdateLogForm = () => {
+const UpdateLogForm = ({ getId }) => {
   const loaderData = useLoaderData();
   const data = useActionData();
   const params = useParams();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
-  // split date for display
-  const { logDate, time, latitude, longitude, heading, notes } =
+  const { voyageId, logDate, time, latitude, longitude, heading, notes } =
     loaderData.data[0];
+
+  // lifting state from this component to UpdateLog.jsx
+  getId(voyageId);
+
+  // split date for display
   const date = logDate.split("T")[0];
 
   // split latitude for display

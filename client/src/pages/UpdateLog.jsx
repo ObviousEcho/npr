@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { redirect, json } from "react-router-dom";
 import Auth from "../utils/auth";
 
 import UpdateLogForm from "../components/Forms/UpdateLogForm";
 
+let vId;
+
 const UpdateLog = () => {
-  return <UpdateLogForm />;
+  const [voyageId, setVoyageId] = useState("");
+
+  // retrieve voyageId from child component
+  const getVoyageId = (str) => {
+    setVoyageId(str);
+    vId = voyageId;
+  };
+
+  return <UpdateLogForm getId={getVoyageId} />;
 };
 
 export default UpdateLog;
@@ -72,8 +83,6 @@ export async function action({ request, params }) {
     body: JSON.stringify(newLogData),
   });
 
-  console.log(response);
-
   if (response.status === 400) {
     return response;
   }
@@ -82,7 +91,5 @@ export async function action({ request, params }) {
     throw json({ message: "Unable to update log data!" }, { status: 500 });
   }
 
-  // redirect(""):
-
-  return response;
+  return redirect(`/log/${vId}`);
 }
