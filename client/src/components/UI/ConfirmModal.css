@@ -1,23 +1,24 @@
 .confirmModal {
-  position: fixed;
-  z-index: 200;
-  top: 25%;
-  left: 12%;
-  width: 75%;
-  height: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20em;
+  height: auto;
   border: solid black 1px;
   border-radius: 10px;
   background-color: aliceblue;
+  z-index: 200;
+  transform: translate(-51%, -245%);
 }
 
 .title {
-  margin: 2em 1em 1em 1em;
+  margin: 1.5em 1em 0.5em 1em;
   text-align: center;
   color: #f88379;
 }
 
 .message {
-  margin: 2em 1em 2em 1em;
+  margin: 1em;
   color: #f88379;
   text-align: center;
 }
@@ -25,7 +26,7 @@
 .click {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 4em;
+  margin-top: 0.5em;
 }
 
 .buttons {
@@ -34,7 +35,7 @@
   border-radius: 8px;
   width: 8em;
   height: 2.5em;
-  margin: 0.4em;
+  margin: 1em;
   background-color: #f88379;
   color: white;
   font-weight: bold;
@@ -53,47 +54,4 @@
 
 .closeModal {
   display: none;
-}
-
-@media screen and (min-width: 1900px) {
-  .confirmModal {
-    width: 40%;
-    height: 35%;
-    left: 31%;
-  }
-
-  .buttons {
-    margin-top: 2em;
-    width: 12em;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .confirmModal {
-    width: 40%;
-    height: 40%;
-    left: 31%;
-  }
-
-  .buttons {
-    width: 10em;
-  }
-}
-
-@media screen and (orientation: portrait) and (min-width: 750px) {
-  .confirmModal {
-    position: fixed;
-    top: 25%;
-    left: 12%;
-    height: 30%;
-  }
-}
-
-@media screen and (orientation: landscape) and (max-width: 900px) {
-  .confirmModal {
-    position: fixed;
-    top: 20%;
-    left: 12%;
-    height: 75%;
-  }
 }

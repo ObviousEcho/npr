@@ -61,26 +61,28 @@ const ConfirmModal = () => {
   };
 
   return (
-    <main className={cssClasses.join(" ")}>
-      <h3 className="title">{confirmTitle}</h3>
-      <p className="message">
-        Are you sure you would like to delete this entry and all of it's data?
-      </p>
-      <div className="click">
-        <button
-          className="buttons"
-          onClick={confirmId.length > 30 ? deleteLogEntry : deleteVoyage}
-        >
-          Delete
-        </button>
-        <button className="buttons" onClick={toggleModal}>
-          Cancel
-        </button>
-      </div>
-      <h4 className="closeBtn" onClick={toggleModal}>
-        X
-      </h4>
-    </main>
+    <div className="container">
+      <main className={cssClasses.join(" ")}>
+        <h4 className="title">{confirmTitle}</h4>
+        <p className="message">
+          Are you sure you would like to delete this entry and all of it's data?
+        </p>
+        <div className="click">
+          <button
+            className="buttons"
+            onClick={confirmId.length > 30 ? deleteLogEntry : deleteVoyage}
+          >
+            Delete
+          </button>
+          <button className="buttons" onClick={toggleModal}>
+            Cancel
+          </button>
+        </div>
+        <h4 className="closeBtn" onClick={toggleModal}>
+          X
+        </h4>
+      </main>
+    </div>
   );
 };
 

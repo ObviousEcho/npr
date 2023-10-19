@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { useGlobalContext } from "../../context/global-context";
 import Button from "../UI/Button";
@@ -11,10 +11,10 @@ const UpdateVoyageModal = () => {
   const params = useParams();
   const [newTitle, setNewTitle] = useState("");
   const [length, setLength] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isOk, setIsOk] = useState(true);
   const { isUpdateModal, toggleUpdateModal, confirmTitle, setTitle } =
     useGlobalContext();
+  const navigate = useNavigate();
 
   const cssClasses = [
     "updateModal",
@@ -50,8 +50,9 @@ const UpdateVoyageModal = () => {
     });
 
     if (response.status === 200) {
-      setIsSubmitted(true);
       setTitle("");
+      toggleUpdateModal();
+      navigate(`/log/${params.voyageId}`);
     }
 
     if (!response.ok) {
@@ -61,36 +62,30 @@ const UpdateVoyageModal = () => {
   };
 
   return (
-    <main className={cssClasses.join(" ")}>
-      {!isSubmitted ? (
-        <>
-          <h3 className="updateHeading">{`Update your ${confirmTitle} voyage`}</h3>
-          <form className="updateForm">
-            <label className="updateLabel">Enter new title:</label>
-            <input
-              className="updateInput"
-              name="requestEmail"
-              value={newTitle}
-              type="email"
-              required
-              onChange={titleChangeHandler}
-            />
-            <div className={"button1"} onClick={(e) => handleFormSubmit(e)}>
-              <Button type="button" buttonName="Submit" />
-            </div>
-          </form>
-        </>
-      ) : (
-        <main className="successful">
-          <h2>Success</h2>
-        </main>
-      )}
-      <h4 className="close" onClick={toggleUpdateModal}>
-        X
-      </h4>
-      {length && <p className="updateError">You must enter a value.</p>}
-      {!isOk && <p className="updateError">Something went wrong!</p>}
-    </main>
+    <div className="container">
+      <main className={cssClasses.join(" ")}>
+        <h4 className="updateHeading">{`Update your ${confirmTitle} voyage`}</h4>
+        <form className="updateForm">
+          <label className="updateLabel">Enter new title:</label>
+          <input
+            className="updateInput"
+            name="requestEmail"
+            value={newTitle}
+            type="email"
+            required
+            onChange={titleChangeHandler}
+          />
+          <div className="button1" onClick={(e) => handleFormSubmit(e)}>
+            <Button type="button" buttonName="Submit" />
+          </div>
+        </form>
+        <h4 className="close" onClick={toggleUpdateModal}>
+          X
+        </h4>
+        {length && <p className="updateError">You must enter a value.</p>}
+        {!isOk && <p className="updateError">Something went wrong!</p>}
+      </main>
+    </div>
   );
 };
 
