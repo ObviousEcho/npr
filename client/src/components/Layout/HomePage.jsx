@@ -6,8 +6,8 @@ import { useGlobalContext } from "../../context/global-context";
 
 const HomePage = () => {
   const token = useRouteLoaderData("root");
-  const { closeModal } = useGlobalContext();
-  closeModal();
+  const { closeModals } = useGlobalContext();
+  closeModals();
 
   return (
     <main className={classes.homePage}>

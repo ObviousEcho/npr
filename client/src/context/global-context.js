@@ -3,16 +3,17 @@ import { createContext, useContext, useState } from "react";
 const GlobalContext = createContext({
   isModal: false,
   toggleModal: () => {},
-  closeModal: () => {},
   isConfirmModal: false,
   toggleConfirmModal: () => {},
-  closeConfirmModal: () => {},
+  closeModals: () => {},
   confirmTitle: "",
   setTitle: () => {},
   confirmId: "",
   setId: () => {},
-  IsBackdrop: false,
+  isBackdrop: false,
   closeBackdrop: () => {},
+  isUpdateModal: false,
+  toggleUpdateModal: () => {},
 });
 
 export const useGlobalContext = () => useContext(GlobalContext);
@@ -21,6 +22,7 @@ export const GlobalProvider = ({ children }) => {
   const [isModal, setIsModal] = useState(false);
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const [isBackdrop, setIsBackdrop] = useState(false);
+  const [isUpdateModal, setIsUpdateModal] = useState(false);
   const [confirmTitle, setConfirmTitle] = useState("");
   const [confirmId, setConfirmId] = useState("");
 
@@ -29,13 +31,13 @@ export const GlobalProvider = ({ children }) => {
     setIsBackdrop((prev) => !prev);
   };
 
-  const closeModal = () => {
-    setIsModal(false);
-    setIsBackdrop(false);
-  };
-
   const toggleConfirmModal = () => {
     setIsConfirmModal((prev) => !prev);
+    setIsBackdrop((prev) => !prev);
+  };
+
+  const toggleUpdateModal = () => {
+    setIsUpdateModal((prev) => !prev);
     setIsBackdrop((prev) => !prev);
   };
 
@@ -43,11 +45,14 @@ export const GlobalProvider = ({ children }) => {
     setIsBackdrop(false);
     setIsModal(false);
     setIsConfirmModal(false);
+    setIsUpdateModal(false);
   };
 
-  const closeConfirmModal = () => {
+  const closeModals = () => {
     setIsConfirmModal(false);
     setIsBackdrop(false);
+    setIsUpdateModal(false);
+    setIsModal(false);
   };
 
   const setTitle = (str) => {
@@ -63,16 +68,17 @@ export const GlobalProvider = ({ children }) => {
       value={{
         isModal,
         toggleModal,
-        closeModal,
         isConfirmModal,
         toggleConfirmModal,
-        closeConfirmModal,
+        closeModals,
         confirmTitle,
         confirmId,
         setTitle,
         setId,
         isBackdrop,
         closeBackdrop,
+        isUpdateModal,
+        toggleUpdateModal,
       }}
     >
       {children}

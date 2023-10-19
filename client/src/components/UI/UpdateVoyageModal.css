@@ -1,0 +1,100 @@
+.updateModal {
+  position: fixed;
+  top: 25%;
+  left: 12%;
+  width: 75%;
+  height: 40%;
+  border: solid black 1px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  z-index: 200;
+}
+
+.updateHeading {
+  margin: 2em 1em 1em 1em;
+  text-align: center;
+}
+
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1em 1em 1em;
+}
+
+.updateLabel {
+  font-size: 1.2em;
+}
+
+.updateInput {
+  border-radius: 5px;
+  margin: 0.5em;
+  width: 95%;
+  height: 2.5em;
+}
+
+.button1 {
+  margin-top: 2em;
+}
+
+.updateModalOpen {
+  display: block;
+}
+
+.updateModalClosed {
+  display: none;
+}
+
+.close {
+  color: gray;
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.successful {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: turquoise;
+}
+
+.updateError {
+  text-align: center;
+}
+
+@media screen and (min-width: 1440px) {
+  .updateModal {
+    height: 30%;
+  }
+
+  .updateInput {
+    width: 65%;
+  }
+
+  .button1 {
+    margin-top: 4em;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .updateModal {
+    width: 50%;
+    height: 45%;
+    left: 25%;
+  }
+
+  .button1 {
+    margin-top: 5em;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 900px) {
+  .updateModal {
+    position: fixed;
+    top: 20%;
+    left: 12%;
+    height: 75%;
+  }
+}

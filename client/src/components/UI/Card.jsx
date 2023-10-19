@@ -79,7 +79,7 @@ const Card = ({
                 className={classes.trash}
               />
             </Link>
-            <span className={classes.updateToolipText}>Update entry</span>
+            <span className={classes.updateToolipText}>Update log</span>
           </div>
           <div className={classes.deleteTip}>
             <DeleteForeverIcon
@@ -90,7 +90,7 @@ const Card = ({
               onClick={deleteLogData}
               className={classes.trash}
             />
-            <span className={classes.deleteTooltipText}>Delete entry</span>
+            <span className={classes.deleteTooltipText}>Delete log</span>
           </div>
         </div>
       </div>

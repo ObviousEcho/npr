@@ -5,6 +5,7 @@ import MainNavigation from "../components/Layout/MainNavigation";
 import Backdrop from "../components/UI/Backdrop";
 import ForgotPassword from "../components/UI/ForgotPasswordModal";
 import Confirm from "../components/UI/ConfirmModal";
+import UpdateVoyageModal from "../components/UI/UpdateVoyageModal";
 
 import Auth from "../utils/auth";
 
@@ -31,6 +32,7 @@ const RootLayout = () => {
         <Backdrop />
         <ForgotPassword />
         <Confirm />
+        <UpdateVoyageModal />
       </main>
     </>
   );

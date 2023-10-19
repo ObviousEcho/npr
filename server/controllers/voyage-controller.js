@@ -60,6 +60,27 @@ const voyageController = {
       });
     }
   },
+
+  // update voyage title
+  async updateVoyage(req, res) {
+    try {
+      const { voyageId } = req.params;
+      const { newTitle } = req.body;
+      const sql = `UPDATE Voyages SET voyageName = ? WHERE voyageId = ?`;
+      const params = [newTitle, voyageId];
+
+      const [data] = await db.execute(sql, params);
+
+      res.json({
+        message: "success",
+      });
+    } catch (err) {
+      res.status(500).json({
+        error: err.message,
+        message: "Unable to complete request.",
+      });
+    }
+  },
 };
 
 module.exports = voyageController;

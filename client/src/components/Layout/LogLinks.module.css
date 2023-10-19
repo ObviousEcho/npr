@@ -9,12 +9,12 @@
   color: #f88379;
 }
 
-.tooltip {
+.deleteTooltip {
   position: relative;
   display: inline-block;
 }
 
-.tooltip .tooltiptext {
+.deleteTooltip .deleteTooltiptext {
   visibility: hidden;
   width: 9em;
   text-align: center;
@@ -30,7 +30,7 @@
   transition: opacity 3s;
 }
 
-.tooltip .tooltiptext::after {
+.deleteTooltip .deleteTooltiptext::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -41,7 +41,44 @@
   border-color: transparent black transparent transparent;
 }
 
-.tooltip:hover .tooltiptext {
+.deleteTooltip:hover .deleteTooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.updateTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.updateTooltip .updateTooltiptext {
+  visibility: hidden;
+  width: 9em;
+  text-align: center;
+  padding: 5px 0;
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: 0.375em;
+  right: 103%;
+  opacity: 0;
+  transition: opacity 3s;
+}
+
+.updateTooltip .updateTooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.updateTooltip:hover .updateTooltiptext {
   visibility: visible;
   opacity: 1;
 }
